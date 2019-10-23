@@ -35,7 +35,7 @@ const Adapter = {
 			return error;
 		}
 	},
-	async getShortAnalysis(publisherId: number): Promise<ShortAnalysisResult> {
+	async getShortAnalysis(publisherId: number): Promise<ShortAnalysisResult | Error> {
 		try {
 			const res = await fetch(`${process.env.BACKEND_URL}/impl-short-pv-reader?publisher=${publisherId}`, {
 				method: 'GET',

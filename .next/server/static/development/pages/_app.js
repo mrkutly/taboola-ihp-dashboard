@@ -176,7 +176,8 @@ const theme = {
     secondary: '#007bff',
     accent: '#9661ff',
     background: '#282c34',
-    black: '#1a1a1a'
+    black: '#1a1a1a',
+    lightGrey: '#cacaca'
   },
   maxWidth: '2000px'
 };
@@ -214,31 +215,31 @@ const Page = props => __jsx(styled_components__WEBPACK_IMPORTED_MODULE_1__["Them
   theme: theme,
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 53
+    lineNumber: 54
   },
   __self: undefined
 }, __jsx(GlobalStyle, {
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 54
+    lineNumber: 55
   },
   __self: undefined
 }), __jsx(StyledPage, {
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 55
+    lineNumber: 56
   },
   __self: undefined
 }, __jsx(_Header__WEBPACK_IMPORTED_MODULE_2__["default"], {
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 56
+    lineNumber: 57
   },
   __self: undefined
 }), __jsx(Inner, {
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 57
+    lineNumber: 58
   },
   __self: undefined
 }, props.children)));

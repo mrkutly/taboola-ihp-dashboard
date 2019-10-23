@@ -5,6 +5,7 @@ type Theme = {
 		accent: string;
 		background: string;
 		black: string;
+		lightGrey: string;
 	};
 	maxWidth: string;
 };

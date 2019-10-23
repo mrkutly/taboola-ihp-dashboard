@@ -9,6 +9,7 @@ const theme: Theme = {
 		accent: '#9661ff',
 		background: '#282c34',
 		black: '#1a1a1a',
+		lightGrey: '#cacaca',
 	},
 	maxWidth: '2000px',
 };

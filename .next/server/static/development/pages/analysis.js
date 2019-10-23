@@ -104,10 +104,13 @@ module.exports =
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utils_Adapter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/Adapter */ "./utils/Adapter.ts");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils_Adapter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/Adapter */ "./utils/Adapter.ts");
 var _jsxFileName = "/Users/mark.sauer.utley/Development/ihp/client/pages/analysis/index.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
 
 
 
@@ -131,7 +134,8 @@ const Analysis = () => {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     async function getData() {
       try {
-        const data = await _utils_Adapter__WEBPACK_IMPORTED_MODULE_1__["default"].getShortAnalysis(1010748); // eslint-disable-next-line @typescript-eslint/camelcase
+        const data = await _utils_Adapter__WEBPACK_IMPORTED_MODULE_2__["default"].getShortAnalysis(1010748);
+        if (data instanceof Error) throw new Error(data.message); // eslint-disable-next-line @typescript-eslint/camelcase
 
         const {
           json_response,
@@ -150,37 +154,107 @@ const Analysis = () => {
   if (loading) return __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27
+      lineNumber: 31
     },
     __self: undefined
   }, "loading...");
   if (error) return __jsx("h1", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28
+      lineNumber: 32
     },
     __self: undefined
   }, "error ", error.message);
   const mappedData = analysisData.map(datum => {
     // console.log(datum);
-    return __jsx("div", {
+    return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("div", {
+      className: "mode",
       key: datum.MODE,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 33
+        lineNumber: 39
       },
       __self: undefined
-    }, datum.MODE);
+    }, datum.MODE), __jsx("div", {
+      className: "num-views",
+      key: datum.num_views,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 42
+      },
+      __self: undefined
+    }, datum.num_views));
   });
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("h1", {
+  return __jsx(ContainerStyles, {
+    id: "page-views-per-mode",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 50
     },
     __self: undefined
-  }, dateRange), mappedData);
+  }, __jsx("h1", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 51
+    },
+    __self: undefined
+  }, "Page Views per mode for ", dateRange), __jsx(GridStyles, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 52
+    },
+    __self: undefined
+  }, __jsx("h3", {
+    className: "mode",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 53
+    },
+    __self: undefined
+  }, "Mode"), __jsx("h3", {
+    className: "num-views",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 54
+    },
+    __self: undefined
+  }, "Page Views"), mappedData));
 };
 
+const ContainerStyles = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.section`
+	max-width: 1200px;
+	margin: 0 auto;
+
+	h1 {
+		font-weight: 500;
+	}
+`;
+const GridStyles = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div`
+	display: grid;
+	grid-template-columns: 350px 1fr;
+	font-size: 1.6rem;
+
+	h3,
+	div {
+		padding-left: 10px;
+	}
+
+	h3 {
+		color: ${props => props.theme.colors.secondary};
+	}
+
+	.mode {
+		grid-column-start: 1;
+	}
+
+	.num-views {
+		grid-column-start: 2;
+	}
+
+	div {
+		border: 1px solid ${props => props.theme.colors.lightGrey};
+	}
+`;
 /* harmony default export */ __webpack_exports__["default"] = (Analysis);
 
 /***/ }),
@@ -285,6 +359,17 @@ module.exports = __webpack_require__(/*! /Users/mark.sauer.utley/Development/ihp
 /***/ (function(module, exports) {
 
 module.exports = require("react");
+
+/***/ }),
+
+/***/ "styled-components":
+/*!************************************!*\
+  !*** external "styled-components" ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("styled-components");
 
 /***/ })
 
