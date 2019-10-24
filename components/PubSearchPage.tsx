@@ -1,13 +1,15 @@
-import { useState, Dispatch } from 'react';
+import { useState, Dispatch, useContext } from 'react';
 import styled from 'styled-components';
 import PubSearchForm from './PubSearchForm';
 import PublisherCard from './PublisherCard';
+import PubContext from '../lib/pubContext';
 
 const PubSearchPage: React.FunctionComponent = () => {
 	const [error, setError]: [Error, Dispatch<Error>] = useState();
 	const [publishers, setPublishers]: [Publisher[], Dispatch<Publisher[]>] = useState([
 		{ name: 'tribunedigital-chicagotribune', id: '1008941', description: 'Tribune Digital - Chicago Tribune' },
 	]);
+	const { setPublisher } = useContext(PubContext);
 
 	return (
 		<Container>
@@ -17,7 +19,7 @@ const PubSearchPage: React.FunctionComponent = () => {
 			{publishers.length > 0 && <h2>Results</h2>}
 			<ul>
 				{publishers.map((pub) => (
-					<PublisherCard publisher={pub} key={pub.id} />
+					<PublisherCard publisher={pub} key={pub.id} setPublisher={setPublisher} />
 				))}
 			</ul>
 		</Container>

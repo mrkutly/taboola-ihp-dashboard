@@ -1,23 +1,31 @@
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import Link from 'next/link';
 
 interface PubCardProps {
 	publisher: Publisher;
+	setPublisher: SetPublisher;
 }
 
-const PublisherCard: React.FunctionComponent<PubCardProps> = ({ publisher }) => {
+const PublisherCard: React.FunctionComponent<PubCardProps> = ({ publisher, setPublisher }) => {
+	const router = useRouter();
 	const { name, id, description } = publisher;
 
+	const goToPub = (): void => {
+		setPublisher(publisher);
+		router.push('/analysis');
+	};
+
 	return (
-		<PubCardStyles>
-			<Link href={{ pathname: '/analysis', query: { ...publisher } }}>
-				<a>
-					<span>
-						{description} ({id})
-					</span>
-					-<span>{name}</span>
-				</a>
-			</Link>
+		<PubCardStyles
+			role="link"
+			tabIndex={0}
+			onClick={(): void => goToPub()}
+			onKeyPress={(e: KeyboardEvent): void => e.which === 13 && goToPub()}
+		>
+			<span>
+				{description} ({id})
+			</span>
+			-<span>{name}</span>
 		</PubCardStyles>
 	);
 };

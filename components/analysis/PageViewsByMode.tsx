@@ -1,33 +1,28 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { Fragment, useContext, useEffect, useState, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
+import PubContext from '../../lib/pubContext';
 import Adapter from '../../utils/Adapter';
 
 const Analysis: React.FunctionComponent = () => {
-	const router = useRouter();
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(null);
-	const [analysisData, setAnalysisData] = useState(null);
-	const [dateRange, setDateRange] = useState(null);
-
-	const { id, name, description } = router.query;
-
-	const publisher = {
-		id,
-		name,
-		description,
-	};
+	const [loading, setLoading]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(true);
+	const [error, setError]: [Error, Dispatch<Error>] = useState(null);
+	const [dateRange, setDateRange]: [string, Dispatch<string>] = useState(null);
+	const { publisher } = useContext(PubContext);
+	const [analysisData, setAnalysisData]: [
+		ShortAnalysisDataResponse[],
+		Dispatch<SetStateAction<ShortAnalysisDataResponse[]>>,
+	] = useState(null);
 
 	useEffect((): void => {
 		async function getData(): Promise<void> {
 			try {
 				const pubId = Number(publisher.id);
-				const data: ShortAnalysisResult | Error = await Adapter.getShortAnalysis(pubId);
+				const response: ShortAnalysisResult | Error = await Adapter.getShortAnalysis(pubId);
 
-				if (data instanceof Error) throw new Error(data.message);
+				if (response instanceof Error) throw new Error(response.message);
 
 				// eslint-disable-next-line @typescript-eslint/camelcase
-				const { json_response, daterange } = data.data[0];
+				const { json_response, daterange } = response.data[0];
 				setAnalysisData(json_response);
 				const formattedDateRange = daterange.split(' - ').join(' and ');
 				setDateRange(formattedDateRange);
@@ -47,14 +42,14 @@ const Analysis: React.FunctionComponent = () => {
 	const mappedData = analysisData.map(
 		(datum: ShortAnalysisDataResponse): JSX.Element => {
 			return (
-				<>
+				<Fragment key={`${datum.MODE}-${datum.num_views}`}>
 					<div className="mode" key={datum.MODE}>
 						{datum.MODE}
 					</div>
 					<div className="num-views" key={datum.num_views}>
 						{datum.num_views}
 					</div>
-				</>
+				</Fragment>
 			);
 		},
 	);

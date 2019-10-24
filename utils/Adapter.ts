@@ -46,7 +46,7 @@ const Adapter = {
 			return error;
 		}
 	},
-	async getLongAnalysis(publisherId: number): Promise<object> {
+	async getLongAnalysis(publisherId: number): Promise<LongAnalysisResult | Error> {
 		try {
 			const res = await fetch(`${process.env.BACKEND_URL}/impl-pv-reader?publisher=${publisherId}`, {
 				method: 'GET',

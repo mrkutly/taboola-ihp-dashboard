@@ -15,6 +15,7 @@ const theme: Theme = {
 };
 
 const StyledPage = styled.div`
+	min-width: 735px;
 	color: ${(props: SCProps): string => props.theme.colors.primary};
 `;
 
@@ -45,12 +46,7 @@ const GlobalStyle = createGlobalStyle`
 		color: ${theme.colors.black};
 	}
 `;
-
-type Props = {
-	children: Element & React.ReactPortal & React.ReactNodeArray | React.ReactNode;
-};
-
-const Page: React.FunctionComponent<Props> = (props) => (
+const Page: React.FunctionComponent<HOCProps> = (props) => (
 	<ThemeProvider theme={theme}>
 		<GlobalStyle />
 		<StyledPage>

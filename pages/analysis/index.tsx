@@ -1,5 +1,6 @@
-import PageViewsPerMode from '../../components/analysis/PageViewsPerMode';
+import PageViewsByMode from '../../components/analysis/PageViewsByMode';
+import withPublisher from '../../lib/withPublisher';
 
-const Analysis: React.FunctionComponent = () => <PageViewsPerMode />;
+const Analysis: React.FunctionComponent = () => <PageViewsByMode />;
 
-export default Analysis;
+export default withPublisher(Analysis);

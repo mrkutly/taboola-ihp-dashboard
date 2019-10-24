@@ -1,8 +1,21 @@
 import App, { AppInitialProps } from 'next/app';
 import Head from 'next/head';
 import Page from '../components/Page';
+import PubContext from '../lib/pubContext';
 
 class MyApp extends App<AppInitialProps> {
+	state = {
+		publisher: {
+			id: '',
+			name: '',
+			description: '',
+		},
+	};
+
+	setPublisher = (publisher: Publisher): void => {
+		this.setState({ publisher });
+	};
+
 	render(): JSX.Element {
 		const { Component, pageProps } = this.props;
 
@@ -13,7 +26,9 @@ class MyApp extends App<AppInitialProps> {
 					<title>Implementation Health</title>
 				</Head>
 				<Page>
-					<Component {...pageProps} />
+					<PubContext.Provider value={{ publisher: this.state.publisher, setPublisher: this.setPublisher }}>
+						<Component {...pageProps} />
+					</PubContext.Provider>
 				</Page>
 			</>
 		);

@@ -18,6 +18,10 @@ const Header: React.FunctionComponent = () => {
 			text: 'Page Views by Mode',
 			href: '/analysis',
 		},
+		{
+			text: 'Mode Data',
+			href: '/analysis/mode-data',
+		},
 	];
 	const currentNavLinks: NavLink[] = router.pathname === '/' ? [] : pubNavLinks;
 

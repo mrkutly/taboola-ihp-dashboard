@@ -1,4 +1,8 @@
-interface Theme {
+type HOCProps = {
+	children: Element & React.ReactPortal & React.ReactNodeArray | React.ReactNode;
+};
+
+type Theme = {
 	colors: {
 		primary: string;
 		secondary: string;
@@ -8,41 +12,67 @@ interface Theme {
 		lightGrey: string;
 	};
 	maxWidth: string;
-}
+};
 
-interface SCProps {
+type SCProps = {
 	theme: Theme;
-}
+};
 
-interface ShortAnalysisDataResponse {
+type ShortAnalysisDataResponse = {
 	MODE: string;
 	num_views: number;
 	publisher_id: number;
-}
+};
 
-interface ShortAnalysisData {
+type ShortAnalysisData = {
 	daterange: string;
 	json_response: ShortAnalysisDataResponse[];
-}
+};
 
-interface ShortAnalysisResult {
+type ShortAnalysisResult = {
 	message: string;
 	state: string;
 	data: ShortAnalysisData[];
-}
+};
 
-interface Publisher {
+type Publisher = {
 	id: string;
 	name: string;
 	description: string;
-}
+};
 
-interface AllPublishersResponse {
+type AllPublishersResponse = {
 	data: {
 		allPublishers: Publisher[];
 	};
-}
+};
 
-interface SetPublisher {
+type SetPublisher = {
 	(publisher: Publisher): void;
-}
+};
+
+type PublisherContext = {
+	publisher: Publisher;
+	setPublisher: SetPublisher;
+};
+
+type LongAnalysisDataResponse = {
+	mode: string;
+	num_placements: number;
+	num_publishers: number;
+	num_views: number;
+	placements: string[];
+	publishers: string[];
+	without_abp: string;
+};
+
+type LongAnalysisData = {
+	daterange: string;
+	json_response: LongAnalysisDataResponse[];
+};
+
+type LongAnalysisResult = {
+	message: string;
+	state: string;
+	data: LongAnalysisData[];
+};
