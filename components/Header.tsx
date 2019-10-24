@@ -1,17 +1,39 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-const Header: React.FunctionComponent = () => (
-	<HeaderStyles>
-		<img src="/header-logo.jpg" alt="taboola logo" />
-		<Link href="/">
-			<a>Home</a>
-		</Link>
-		<Link href="/analysis">
-			<a>Analysis</a>
-		</Link>
-	</HeaderStyles>
-);
+interface NavLink {
+	text: string;
+	href: string;
+}
+
+const Header: React.FunctionComponent = () => {
+	const router = useRouter();
+	const pubNavLinks: NavLink[] = [
+		{
+			text: 'Publisher Search',
+			href: '/',
+		},
+		{
+			text: 'Page Views by Mode',
+			href: '/analysis',
+		},
+	];
+	const currentNavLinks: NavLink[] = router.pathname === '/' ? [] : pubNavLinks;
+
+	return (
+		<HeaderStyles>
+			<img src="/header-logo.jpg" alt="taboola logo" />
+			<nav>
+				{currentNavLinks.map((link) => (
+					<Link href={link.href} key={link.href}>
+						<a className={router.pathname === link.href ? 'active' : undefined}>{link.text}</a>
+					</Link>
+				))}
+			</nav>
+		</HeaderStyles>
+	);
+};
 
 const HeaderStyles = styled.header`
 	display: flex;
@@ -21,7 +43,7 @@ const HeaderStyles = styled.header`
 	align-items: center;
 
 	img {
-		height: 40px;
+		height: 52px;
 		margin-right: 20px;
 	}
 
@@ -32,12 +54,17 @@ const HeaderStyles = styled.header`
 		background: none;
 		border: 0;
 		cursor: pointer;
-		color: ${(props: SCProps): string => props.theme.colors.black};
+		color: ${(props: SCProps): string => props.theme.colors.secondary};
 
 		&:hover,
 		&:focus {
-			color: ${(props: SCProps): string => props.theme.colors.secondary};
+			color: ${(props: SCProps): string => props.theme.colors.accent};
 			outline: none;
+		}
+
+		&.active {
+			color: ${(props: SCProps): string => props.theme.colors.primary};
+			cursor: default;
 		}
 	}
 `;

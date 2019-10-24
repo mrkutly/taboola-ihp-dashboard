@@ -4,14 +4,14 @@ import Header from './Header';
 
 const theme: Theme = {
 	colors: {
-		primary: 'white',
+		primary: '#282c34',
 		secondary: '#007bff',
-		accent: '#9661ff',
-		background: '#282c34',
+		accent: '#ffd355',
+		background: 'white',
 		black: '#1a1a1a',
 		lightGrey: '#cacaca',
 	},
-	maxWidth: '2000px',
+	maxWidth: '1500px',
 };
 
 const StyledPage = styled.div`

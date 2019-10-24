@@ -68,6 +68,30 @@ const Adapter = {
 			return error;
 		}
 	},
+	async getPublisher(publisherId: number): Promise<AllPublishersResponse> {
+		try {
+			const res = await fetch('http://ps001.taboolasyndication.com:7777', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json',
+				},
+				body: JSON.stringify({
+					query: `{
+							allPublishers(id:${publisherId}){
+								id
+								name
+								description
+							}
+						}
+						`,
+				}),
+			});
+			return res.json();
+		} catch (error) {
+			return error;
+		}
+	},
 };
 
 export default Adapter;

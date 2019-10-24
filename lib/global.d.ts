@@ -1,4 +1,4 @@
-type Theme = {
+interface Theme {
 	colors: {
 		primary: string;
 		secondary: string;
@@ -8,25 +8,41 @@ type Theme = {
 		lightGrey: string;
 	};
 	maxWidth: string;
-};
+}
 
-type SCProps = {
+interface SCProps {
 	theme: Theme;
-};
+}
 
-type ShortAnalysisDataResponse = {
+interface ShortAnalysisDataResponse {
 	MODE: string;
 	num_views: number;
 	publisher_id: number;
-};
+}
 
-type ShortAnalysisData = {
+interface ShortAnalysisData {
 	daterange: string;
 	json_response: ShortAnalysisDataResponse[];
-};
+}
 
-type ShortAnalysisResult = {
+interface ShortAnalysisResult {
 	message: string;
 	state: string;
 	data: ShortAnalysisData[];
-};
+}
+
+interface Publisher {
+	id: string;
+	name: string;
+	description: string;
+}
+
+interface AllPublishersResponse {
+	data: {
+		allPublishers: Publisher[];
+	};
+}
+
+interface SetPublisher {
+	(publisher: Publisher): void;
+}
