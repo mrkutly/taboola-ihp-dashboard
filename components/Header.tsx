@@ -7,13 +7,16 @@ const Header: React.FunctionComponent = () => (
 		<Link href="/">
 			<a>Home</a>
 		</Link>
+		<Link href="/analysis">
+			<a>Analysis</a>
+		</Link>
 	</HeaderStyles>
 );
 
 const HeaderStyles = styled.header`
 	display: flex;
 	background: white;
-	color: ${(props): string => props.theme.colors.secondary};
+	color: ${(props: SCProps): string => props.theme.colors.secondary};
 	padding: 1vh 1vw;
 	align-items: center;
 
@@ -29,11 +32,11 @@ const HeaderStyles = styled.header`
 		background: none;
 		border: 0;
 		cursor: pointer;
-		color: ${(props): string => props.theme.colors.black};
+		color: ${(props: SCProps): string => props.theme.colors.black};
 
 		&:hover,
 		&:focus {
-			color: ${(props): string => props.theme.colors.secondary};
+			color: ${(props: SCProps): string => props.theme.colors.secondary};
 			outline: none;
 		}
 	}
