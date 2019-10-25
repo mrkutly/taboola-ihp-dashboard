@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+
 /* eslint-disable @typescript-eslint/camelcase */
 interface ModeDataProps {
 	modeData: LongAnalysisDataResponse;
+	publisher: string;
 }
 
 const ModeDataCard: React.FunctionComponent<ModeDataProps> = (props) => {
@@ -17,7 +19,7 @@ const ModeDataCard: React.FunctionComponent<ModeDataProps> = (props) => {
 					<ul>
 						<li>Number of placements: {num_placements}</li>
 						<li>Number of views: {num_views}</li>
-						<li>In loader: {loader}</li>
+						<li>In loader: {loader || props.publisher}</li>
 					</ul>
 				</div>
 				<div>

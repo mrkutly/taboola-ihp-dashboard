@@ -13,28 +13,6 @@ const headers: HeadersInitInterface = {
 };
 
 const Adapter = {
-	async getPublisherStats(publisher: string): Promise<object> {
-		try {
-			const res = await fetch(`${process.env.BACKEND_URL}/dataframe_stats?publisher=${publisher}`, {
-				method: 'GET',
-				headers,
-			});
-			return res.json();
-		} catch (error) {
-			return error;
-		}
-	},
-	async getPublisherAnalysisJson(publisher: string): Promise<object> {
-		try {
-			const res = await fetch(`${process.env.BACKEND_URL}/data_json?publisher=${publisher}`, {
-				method: 'GET',
-				headers,
-			});
-			return res.json();
-		} catch (error) {
-			return error;
-		}
-	},
 	async getShortAnalysis(publisherId: number): Promise<ShortAnalysisResult | Error> {
 		try {
 			const res = await fetch(`${process.env.BACKEND_URL}/impl-short-pv-reader?publisher=${publisherId}`, {
@@ -57,12 +35,20 @@ const Adapter = {
 			return error;
 		}
 	},
-	async getModes(publisherId: number): Promise<object> {
+	async getModes(publisherId: number): Promise<ListModesResponse> {
 		try {
 			const res = await fetch(`${process.env.BACKEND_URL}/impl-list-modes?publisher=${publisherId}`, {
 				method: 'GET',
 				headers,
 			});
+			return res.json();
+		} catch (error) {
+			return error;
+		}
+	},
+	async getModesComparison(publisherId: number): Promise<ModeComparisonResponse> {
+		try {
+			const res = await fetch(`${process.env.BACKEND_URL}/impl-compare-modes?publisher=${publisherId}`);
 			return res.json();
 		} catch (error) {
 			return error;

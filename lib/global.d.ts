@@ -76,3 +76,38 @@ type LongAnalysisResult = {
 	state: string;
 	data: LongAnalysisData[];
 };
+
+type Mode = {
+	MODE_NAMES: string;
+	MODE_TYPE: string;
+	count: number;
+	number_views: number;
+	publisher_id: number;
+};
+
+type ModeComparisonData = {
+	daterange: string;
+	all_modes: Mode[];
+	active_modes: string[];
+	inactive_modes: string[];
+};
+
+type ModeComparisonResponse = {
+	message: string;
+	state: string;
+	data: ModeComparisonData[];
+};
+
+type ListModesResponseDatum = {
+	json_response: {
+		MODE: string;
+		mode_date: string;
+		mode_id: number;
+	};
+};
+
+type ListModesResponse = {
+	message: string;
+	state: string;
+	data: ListModesResponseDatum[];
+};

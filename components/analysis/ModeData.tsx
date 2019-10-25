@@ -57,7 +57,7 @@ const PageViews: React.FunctionComponent = () => {
 			<h1>Mode Data from {dateRange}</h1>
 			<ModeListStyles>
 				{analysisData.map((data) => (
-					<ModeDataCard modeData={data} />
+					<ModeDataCard modeData={data} publisher={publisher.name} />
 				))}
 			</ModeListStyles>
 		</>
