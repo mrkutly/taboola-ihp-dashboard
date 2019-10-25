@@ -11,7 +11,7 @@ const PubSearchPage: React.FunctionComponent = () => {
 
 	return (
 		<Container>
-			<h1>Publisher Search</h1>
+			<h1>Find your publisher to get their analysis</h1>
 			<PubSearchForm setError={setError} setPublishers={setPublishers} />
 			{error && <p>{error.message}</p>}
 			{publishers.length > 0 && <h2>Results</h2>}

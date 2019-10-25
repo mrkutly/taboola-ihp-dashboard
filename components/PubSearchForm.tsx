@@ -8,12 +8,21 @@ interface PubSearchFormProps {
 }
 
 const PubSearchForm: React.FunctionComponent<PubSearchFormProps> = ({ setError, setPublishers }) => {
-	const [publisherId, setPublisherId]: [string, Dispatch<string>] = useState();
+	const [publisherId, setPublisherId]: [string, Dispatch<string>] = useState('');
 
 	const handleSubmit = async (e: Event): Promise<void> => {
 		try {
 			e.preventDefault();
 			const response = await Adapter.getPublisher(Number(publisherId));
+
+			if (!response || !response.data) {
+				throw new Error('There was a problem connecting to the database.');
+			}
+
+			if (response.data.allPublishers.length === 0) {
+				throw new Error('No results.');
+			}
+
 			setPublishers(response.data.allPublishers);
 		} catch (err) {
 			setError(err);
@@ -23,7 +32,7 @@ const PubSearchForm: React.FunctionComponent<PubSearchFormProps> = ({ setError, 
 	return (
 		<FormStyles onSubmit={handleSubmit}>
 			<fieldset>
-				<legend>Search </legend>
+				<legend>Search publishers</legend>
 				<label htmlFor="pub-id-search">
 					Publisher ID:
 					<input
@@ -33,7 +42,9 @@ const PubSearchForm: React.FunctionComponent<PubSearchFormProps> = ({ setError, 
 						onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setPublisherId(e.target.value)}
 					/>
 				</label>
-				<button type="submit">Search</button>
+				<button type="submit" disabled={publisherId.length < 3}>
+					Search
+				</button>
 			</fieldset>
 		</FormStyles>
 	);
@@ -65,6 +76,10 @@ const FormStyles = styled.form`
 		padding: 4px;
 		margin-top: 10px;
 		display: block;
+
+		&[disabled] {
+			background: ${(props: SCProps): string => props.theme.colors.lightGrey};
+		}
 	}
 `;
 
