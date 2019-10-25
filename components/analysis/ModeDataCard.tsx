@@ -9,16 +9,19 @@ const ModeDataCard: React.FunctionComponent<ModeDataProps> = (props) => {
 	const [modeName, loader] = mode.split(/[:=]/g).filter((string) => string.length > 3);
 
 	return (
-		<li>
+		<ListItemStyles>
+			<h2>{modeName}</h2>
 			<CardStyles>
 				<div>
-					<h1>{modeName}</h1>
-					<p>Number of placements: {num_placements}</p>
-					<p>Number of views: {num_views}</p>
-					<p>In loader: {loader}</p>
+					<h3>Mode Data</h3>
+					<ul>
+						<li>Number of placements: {num_placements}</li>
+						<li>Number of views: {num_views}</li>
+						<li>In loader: {loader}</li>
+					</ul>
 				</div>
 				<div>
-					<h2>Placements</h2>
+					<h3>Placements</h3>
 					<ul>
 						{placements.map((placement) => (
 							<li>{placement}</li>
@@ -26,7 +29,7 @@ const ModeDataCard: React.FunctionComponent<ModeDataProps> = (props) => {
 					</ul>
 				</div>
 				<div>
-					<h2>Publishers</h2>
+					<h3>Publishers</h3>
 					<ul>
 						{publishers.map((publisher) => (
 							<li>{publisher}</li>
@@ -34,14 +37,30 @@ const ModeDataCard: React.FunctionComponent<ModeDataProps> = (props) => {
 					</ul>
 				</div>
 			</CardStyles>
-		</li>
+		</ListItemStyles>
 	);
 };
+
+const ListItemStyles = styled.li`
+	margin: 5vh auto;
+	h1 {
+		margin-bottom: 0;
+	}
+`;
 
 const CardStyles = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	margin: 5vh auto;
+	border-radius: 5px;
+	border: 1px solid ${(props: SCProps): string => props.theme.colors.lightGrey};
+
+	h2 {
+		margin-bottom: 0;
+	}
+
+	div {
+		padding: 0 20px 20px;
+	}
 `;
 
 export default ModeDataCard;

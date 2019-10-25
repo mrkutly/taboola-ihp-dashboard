@@ -1,17 +1,26 @@
-import { Fragment, useContext, useEffect, useState, Dispatch, SetStateAction } from 'react';
+/* eslint-disable @typescript-eslint/camelcase */
+import { Fragment, useContext, useEffect, useState, Dispatch } from 'react';
 import styled from 'styled-components';
 import PubContext from '../../lib/pubContext';
 import Adapter from '../../utils/Adapter';
 
+interface PVAnalysisState {
+	dateRange: string;
+	loading: boolean;
+	error: Error;
+	analysisData: ShortAnalysisDataResponse[];
+}
+
+const defaultState: PVAnalysisState = {
+	dateRange: null,
+	loading: true,
+	error: null,
+	analysisData: null,
+};
+
 const Analysis: React.FunctionComponent = () => {
-	const [loading, setLoading]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(true);
-	const [error, setError]: [Error, Dispatch<Error>] = useState(null);
-	const [dateRange, setDateRange]: [string, Dispatch<string>] = useState(null);
+	const [state, setState]: [PVAnalysisState, Dispatch<PVAnalysisState>] = useState(defaultState);
 	const { publisher } = useContext(PubContext);
-	const [analysisData, setAnalysisData]: [
-		ShortAnalysisDataResponse[],
-		Dispatch<SetStateAction<ShortAnalysisDataResponse[]>>,
-	] = useState(null);
 
 	useEffect((): void => {
 		async function getData(): Promise<void> {
@@ -21,20 +30,27 @@ const Analysis: React.FunctionComponent = () => {
 
 				if (response instanceof Error) throw new Error(response.message);
 
-				// eslint-disable-next-line @typescript-eslint/camelcase
 				const { json_response, daterange } = response.data[0];
-				setAnalysisData(json_response);
 				const formattedDateRange = daterange.split(' - ').join(' and ');
-				setDateRange(formattedDateRange);
-				setLoading(false);
+				setState({
+					...state,
+					analysisData: json_response,
+					dateRange: formattedDateRange,
+					loading: false,
+				});
 			} catch (err) {
-				setError(err);
-				setLoading(false);
+				setState({
+					...state,
+					error: err,
+					loading: false,
+				});
 			}
 		}
 
 		getData();
 	}, []);
+
+	const { error, loading, analysisData, dateRange } = state;
 
 	if (loading) return <p>loading...</p>;
 	if (error) return <p>Error: {error.message}</p>;

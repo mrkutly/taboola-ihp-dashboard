@@ -1,16 +1,27 @@
-import { Dispatch, useContext, useEffect, useState, SetStateAction } from 'react';
+/* eslint-disable @typescript-eslint/camelcase */
+import styled from 'styled-components';
+import { Dispatch, useContext, useEffect, useState } from 'react';
 import PubContext from '../../lib/pubContext';
 import Adapter from '../../utils/Adapter';
 import ModeDataCard from './ModeDataCard';
 
+interface ModeDataState {
+	dateRange: string;
+	loading: boolean;
+	error: Error;
+	analysisData: LongAnalysisDataResponse[];
+}
+
+const defaultState: ModeDataState = {
+	dateRange: null,
+	loading: true,
+	error: null,
+	analysisData: null,
+};
+
 const PageViews: React.FunctionComponent = () => {
-	const [loading, setLoading]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(true);
-	const [error, setError]: [Error, Dispatch<Error>] = useState();
+	const [state, setState]: [ModeDataState, Dispatch<ModeDataState>] = useState(defaultState);
 	const { publisher } = useContext(PubContext);
-	const [analysisData, setAnalysisData]: [
-		LongAnalysisDataResponse[],
-		Dispatch<SetStateAction<LongAnalysisDataResponse[]>>,
-	] = useState(null);
 
 	useEffect((): void => {
 		async function getData(): Promise<void> {
@@ -19,27 +30,44 @@ const PageViews: React.FunctionComponent = () => {
 				const response: LongAnalysisResult | Error = await Adapter.getLongAnalysis(pubId);
 
 				if (response instanceof Error) throw new Error(response.message);
-				const jsonData = response.data[0].json_response;
-				setAnalysisData(jsonData);
-				setLoading(false);
+				const { json_response, daterange } = response.data[0];
+				const formattedDateRange = daterange.split(' - ').join(' and ');
+
+				setState({
+					...state,
+					analysisData: json_response,
+					loading: false,
+					dateRange: formattedDateRange,
+				});
 			} catch (err) {
-				setError(err);
+				setState({ ...state, error: err });
 			}
 		}
 
 		getData();
 	}, []);
 
+	const { error, loading, analysisData, dateRange } = state;
+
 	if (loading) return <p>loading...</p>;
 	if (error) return <p>Error: {error.message}</p>;
 
 	return (
-		<ul>
-			{analysisData.map((data) => (
-				<ModeDataCard modeData={data} />
-			))}
-		</ul>
+		<>
+			<h1>Mode Data from {dateRange}</h1>
+			<ModeListStyles>
+				{analysisData.map((data) => (
+					<ModeDataCard modeData={data} />
+				))}
+			</ModeListStyles>
+		</>
 	);
 };
+
+const ModeListStyles = styled.ul`
+	list-style: none;
+	max-width: 1200px;
+	margin: 0 auto;
+`;
 
 export default PageViews;
