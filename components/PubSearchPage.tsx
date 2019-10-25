@@ -6,9 +6,7 @@ import PubContext from '../lib/pubContext';
 
 const PubSearchPage: React.FunctionComponent = () => {
 	const [error, setError]: [Error, Dispatch<Error>] = useState();
-	const [publishers, setPublishers]: [Publisher[], Dispatch<Publisher[]>] = useState([
-		{ name: 'tribunedigital-chicagotribune', id: '1008941', description: 'Tribune Digital - Chicago Tribune' },
-	]);
+	const [publishers, setPublishers]: [Publisher[], Dispatch<Publisher[]>] = useState([]);
 	const { setPublisher } = useContext(PubContext);
 
 	return (

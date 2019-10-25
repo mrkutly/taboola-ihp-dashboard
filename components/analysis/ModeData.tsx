@@ -31,7 +31,7 @@ const PageViews: React.FunctionComponent = () => {
 
 				if (response instanceof Error) throw new Error(response.message);
 				const { json_response, daterange } = response.data[0];
-				const formattedDateRange = daterange.split(' - ').join(' and ');
+				const formattedDateRange = daterange.split(' - ').join(' to ');
 
 				setState({
 					...state,
