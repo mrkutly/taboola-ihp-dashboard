@@ -10,6 +10,10 @@ interface NavLink {
 
 const pubNavLinks: NavLink[] = [
 	{
+		text: 'IHP Dashboard Home',
+		href: '/',
+	},
+	{
 		text: 'Publisher Search',
 		href: '/analysis',
 	},
@@ -25,7 +29,9 @@ const pubNavLinks: NavLink[] = [
 
 const Header: React.FunctionComponent = () => {
 	const router = useRouter();
-	const currentNavLinks: NavLink[] = ['/', '/analysis'].includes(router.pathname) ? [] : pubNavLinks;
+	const currentNavLinks: NavLink[] = ['/', '/analysis', '/paamon', '/reporting'].includes(router.pathname)
+		? [pubNavLinks[0]]
+		: pubNavLinks;
 
 	useEffect((): EffectCallback => {
 		const anchor = document.querySelector('#intersection-anchor');

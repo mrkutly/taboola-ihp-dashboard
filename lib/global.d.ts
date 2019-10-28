@@ -56,6 +56,20 @@ type PublisherContext = {
 	setPublisher: SetPublisher;
 };
 
+type Authentication = {
+	token: string;
+	expires: number;
+};
+
+type SetAuthentication = {
+	(authentication: Authentication): void;
+};
+
+type AuthContext = {
+	authentication: Authentication;
+	setAuthentication: setAuthentication;
+};
+
 type LongAnalysisDataResponse = {
 	mode: string;
 	num_placements: number;
@@ -111,3 +125,8 @@ type ListModesResponse = {
 	state: string;
 	data: ListModesResponseDatum[];
 };
+
+interface NavLink {
+	text: string;
+	href: string;
+}
