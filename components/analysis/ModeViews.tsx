@@ -18,7 +18,7 @@ const defaultState: PVAnalysisState = {
 	analysisData: null,
 };
 
-const Analysis: React.FunctionComponent = () => {
+const ModeViews: React.FunctionComponent = () => {
 	const [state, setState]: [PVAnalysisState, Dispatch<PVAnalysisState>] = useState(defaultState);
 	const { publisher } = useContext(PubContext);
 
@@ -84,7 +84,7 @@ const Analysis: React.FunctionComponent = () => {
 };
 
 const ContainerStyles = styled.section`
-	max-width: 1200px;
+	max-width: 800px;
 	margin: 0 auto;
 
 	h1,
@@ -99,7 +99,7 @@ const ContainerStyles = styled.section`
 
 const GridStyles = styled.div`
 	display: grid;
-	grid-template-columns: 350px 1fr;
+	grid-template-columns: 2fr 1fr;
 	font-size: 1.6rem;
 
 	div {
@@ -126,4 +126,4 @@ const GridStyles = styled.div`
 	}
 `;
 
-export default Analysis;
+export default ModeViews;

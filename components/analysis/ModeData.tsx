@@ -53,21 +53,25 @@ const PageViews: React.FunctionComponent = () => {
 	if (error) return <p>Error: {error.message}</p>;
 
 	return (
-		<>
+		<ModeDataStyles>
 			<h1>Mode Data from {dateRange}</h1>
 			<ModeListStyles>
 				{analysisData.map((data) => (
 					<ModeDataCard modeData={data} publisher={publisher.name} />
 				))}
 			</ModeListStyles>
-		</>
+		</ModeDataStyles>
 	);
 };
 
 const ModeListStyles = styled.ul`
 	list-style: none;
-	max-width: 1200px;
 	margin: 0 auto;
+	padding-left: 0;
+`;
+
+const ModeDataStyles = styled.div`
+	max-width: 1200px;
 `;
 
 export default PageViews;

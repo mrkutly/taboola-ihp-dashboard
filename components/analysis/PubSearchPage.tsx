@@ -2,7 +2,7 @@ import { useState, Dispatch, useContext } from 'react';
 import styled from 'styled-components';
 import PubSearchForm from './PubSearchForm';
 import PublisherCard from './PublisherCard';
-import PubContext from '../lib/pubContext';
+import PubContext from '../../lib/pubContext';
 
 const PubSearchPage: React.FunctionComponent = () => {
 	const [error, setError]: [Error, Dispatch<Error>] = useState();

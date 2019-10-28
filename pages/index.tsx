@@ -1,5 +1,5 @@
-import PubSearchPage from '../components/PubSearchPage';
-
-const Index: React.FunctionComponent = () => <PubSearchPage />;
+const Index: React.FunctionComponent = () => {
+	return <div>hello</div>;
+};
 
 export default Index;

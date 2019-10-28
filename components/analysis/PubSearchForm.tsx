@@ -1,6 +1,6 @@
 import { useState, Dispatch } from 'react';
 import styled from 'styled-components';
-import Adapter from '../utils/Adapter';
+import Adapter from '../../utils/Adapter';
 
 interface PubSearchFormProps {
 	setError: Function;

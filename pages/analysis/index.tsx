@@ -1,6 +1,5 @@
-import PageViewsByMode from '../../components/analysis/PageViewsByMode';
-import withPublisher from '../../lib/withPublisher';
+import PubSearchPage from '../../components/analysis/PubSearchPage';
 
-const Analysis: React.FunctionComponent = () => <PageViewsByMode />;
+const Index: React.FunctionComponent = () => <PubSearchPage />;
 
-export default withPublisher(Analysis);
+export default Index;
