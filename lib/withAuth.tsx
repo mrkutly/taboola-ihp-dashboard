@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+import Loading from '../components/Loading';
 import AuthContext from './authContext';
 
 const storageKey = 'ihpDashboard';
@@ -27,6 +28,7 @@ const withAuth = (WrappedComponent: React.FunctionComponent<{}>): React.Function
 					token,
 					expires,
 				});
+
 				return;
 			}
 		}
@@ -40,19 +42,19 @@ const withAuth = (WrappedComponent: React.FunctionComponent<{}>): React.Function
 				return acc;
 			}, {});
 
-			window.location.replace(`${window.location.protocol}//${window.location.host}${window.location.pathname}`);
+			// window.location.replace(`${window.location.protocol}//${window.location.host}${window.location.pathname}`);
 
 			localStorage.setItem(
 				storageKey,
 				JSON.stringify({
 					token: params.access_token,
-					expires: Date.now() + Number(params.expires_in),
+					expires: Date.now() + Number(params.expires_in) * 1000,
 				}),
 			);
 
 			setAuthentication({
 				token: params.access_token,
-				expires: Date.now() + Number(params.expires_in),
+				expires: Date.now() + Number(params.expires_in) * 1000,
 			});
 
 			return;
@@ -65,6 +67,7 @@ const withAuth = (WrappedComponent: React.FunctionComponent<{}>): React.Function
 		}
 	}, []);
 
+	if (!authentication.token) return <Loading />;
 	return <WrappedComponent {...props} />;
 };
 
