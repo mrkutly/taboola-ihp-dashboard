@@ -1,18 +1,24 @@
-import { useState, Dispatch } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import Adapter from '../../utils/Adapter';
+import { PubSearchState } from './PubSearchPage';
 
 interface PubSearchFormProps {
-	setError: Function;
-	setPublishers: Function;
+	setSearchState: Dispatch<SetStateAction<PubSearchState>>;
+	searchState: PubSearchState;
 }
 
-const PubSearchForm: React.FunctionComponent<PubSearchFormProps> = ({ setError, setPublishers }) => {
+const PubSearchForm: React.FunctionComponent<PubSearchFormProps> = ({ setSearchState, searchState }) => {
 	const [publisherId, setPublisherId]: [string, Dispatch<string>] = useState('');
 
 	const handleSubmit = async (e: Event): Promise<void> => {
 		try {
 			e.preventDefault();
+			setSearchState({
+				...searchState,
+				loading: true,
+			});
+
 			const response = await Adapter.getPublisher(Number(publisherId));
 
 			if (!response || !response.data) {
@@ -23,9 +29,17 @@ const PubSearchForm: React.FunctionComponent<PubSearchFormProps> = ({ setError, 
 				throw new Error('No results.');
 			}
 
-			setPublishers(response.data.allPublishers);
+			setSearchState({
+				...searchState,
+				publishers: response.data.allPublishers,
+				loading: false,
+			});
 		} catch (err) {
-			setError(err);
+			setSearchState({
+				...searchState,
+				loading: false,
+				error: err,
+			});
 		}
 	};
 

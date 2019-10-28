@@ -8,24 +8,24 @@ interface NavLink {
 	href: string;
 }
 
+const pubNavLinks: NavLink[] = [
+	{
+		text: 'Publisher Search',
+		href: '/analysis',
+	},
+	{
+		text: 'Page Views by Mode',
+		href: '/analysis/mode-views',
+	},
+	{
+		text: 'Mode Data',
+		href: '/analysis/mode-data',
+	},
+];
+
 const Header: React.FunctionComponent = () => {
 	const router = useRouter();
-
-	const pubNavLinks: NavLink[] = [
-		{
-			text: 'Publisher Search',
-			href: '/analysis',
-		},
-		{
-			text: 'Page Views by Mode',
-			href: '/analysis/mode-views',
-		},
-		{
-			text: 'Mode Data',
-			href: '/analysis/mode-data',
-		},
-	];
-	const currentNavLinks: NavLink[] = router.pathname === '/' ? [] : pubNavLinks;
+	const currentNavLinks: NavLink[] = ['/', '/analysis'].includes(router.pathname) ? [] : pubNavLinks;
 
 	useEffect((): EffectCallback => {
 		const anchor = document.querySelector('#intersection-anchor');
@@ -80,12 +80,12 @@ const HeaderStyles = styled.header`
 	&:after {
 		content: '';
 		width: 0;
-		height: 1px;
+		height: 2px;
 		background: ${(props: SCProps): string => props.theme.colors.accent};
 		position: absolute;
 		left: 50%;
 		transform: translateX(-50%);
-		transition: width 0.5s linear;
+		transition: width 0.4s ease-in;
 		margin-top: 3.5rem;
 	}
 

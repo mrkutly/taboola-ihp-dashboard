@@ -4,6 +4,7 @@ import { Dispatch, useContext, useEffect, useState } from 'react';
 import PubContext from '../../lib/pubContext';
 import Adapter from '../../utils/Adapter';
 import ModeDataCard from './ModeDataCard';
+import Loading from '../Loading';
 
 interface ModeDataState {
 	dateRange: string;
@@ -49,7 +50,7 @@ const PageViews: React.FunctionComponent = () => {
 
 	const { error, loading, analysisData, dateRange } = state;
 
-	if (loading) return <p>loading...</p>;
+	if (loading) return <Loading />;
 	if (error) return <p>Error: {error.message}</p>;
 
 	return (
@@ -57,7 +58,7 @@ const PageViews: React.FunctionComponent = () => {
 			<h1>Mode Data from {dateRange}</h1>
 			<ModeListStyles>
 				{analysisData.map((data) => (
-					<ModeDataCard modeData={data} publisher={publisher.name} />
+					<ModeDataCard modeData={data} publisher={publisher.name} key={`${data.mode}-${data.num_views}`} />
 				))}
 			</ModeListStyles>
 		</ModeDataStyles>

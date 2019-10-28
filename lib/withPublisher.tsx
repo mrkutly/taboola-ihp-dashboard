@@ -11,7 +11,7 @@ const withPublisher = (WrappedComponent: React.FunctionComponent<{}>): React.Fun
 
 	useEffect(() => {
 		if (publisher.id.length === 0) {
-			router.push('/');
+			router.push('/analysis');
 			return;
 		}
 

@@ -6,9 +6,9 @@ import PubContext from '../lib/pubContext';
 class MyApp extends App<AppInitialProps> {
 	state = {
 		publisher: {
-			id: '1008945',
-			name: 'tribunedigital-thecourant',
-			description: 'TribuneDigital - TheCourant',
+			id: '',
+			name: '',
+			description: '',
 		},
 	};
 

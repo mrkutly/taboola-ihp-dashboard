@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import { Fragment, useContext, useEffect, useState, Dispatch } from 'react';
 import styled from 'styled-components';
+import Loading from '../Loading';
 import PubContext from '../../lib/pubContext';
 import Adapter from '../../utils/Adapter';
 
@@ -52,7 +53,7 @@ const ModeViews: React.FunctionComponent = () => {
 
 	const { error, loading, analysisData, dateRange } = state;
 
-	if (loading) return <p>loading...</p>;
+	if (loading) return <Loading />;
 	if (error) return <p>Error: {error.message}</p>;
 
 	const mappedData = analysisData.map(

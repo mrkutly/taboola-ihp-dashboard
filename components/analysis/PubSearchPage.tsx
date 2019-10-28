@@ -1,19 +1,31 @@
-import { useState, Dispatch, useContext } from 'react';
+import { useState, Dispatch, useContext, SetStateAction } from 'react';
 import styled from 'styled-components';
 import PubSearchForm from './PubSearchForm';
 import PublisherCard from './PublisherCard';
+import Loading from '../Loading';
 import PubContext from '../../lib/pubContext';
 
+export interface PubSearchState {
+	error: Error | null;
+	publishers: Publisher[];
+	loading: boolean;
+}
+
 const PubSearchPage: React.FunctionComponent = () => {
-	const [error, setError]: [Error, Dispatch<Error>] = useState();
-	const [publishers, setPublishers]: [Publisher[], Dispatch<Publisher[]>] = useState([]);
+	const [state, setState]: [PubSearchState, Dispatch<SetStateAction<PubSearchState>>] = useState({
+		error: null,
+		publishers: [],
+		loading: false,
+	});
 	const { setPublisher } = useContext(PubContext);
+	const { loading, error, publishers } = state;
 
 	return (
 		<Container>
 			<h1>Find your publisher to get their analysis</h1>
-			<PubSearchForm setError={setError} setPublishers={setPublishers} />
+			<PubSearchForm setSearchState={setState} searchState={state} />
 			{error && <p>{error.message}</p>}
+			{loading && <Loading />}
 			{publishers.length > 0 && <h2>Results</h2>}
 			<ul>
 				{publishers.map((pub) => (
