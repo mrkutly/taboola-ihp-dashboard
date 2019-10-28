@@ -26,7 +26,7 @@ const ModeDataCard: React.FunctionComponent<ModeDataProps> = (props) => {
 					<h3>Placements</h3>
 					<ul>
 						{placements.map((placement) => (
-							<li>{placement}</li>
+							<li key={`${modeName}-${placement}-${num_views}`}>{placement}</li>
 						))}
 					</ul>
 				</div>
@@ -34,7 +34,7 @@ const ModeDataCard: React.FunctionComponent<ModeDataProps> = (props) => {
 					<h3>Publishers</h3>
 					<ul>
 						{publishers.map((publisher) => (
-							<li>{publisher}</li>
+							<li key={`${modeName}-${publisher}-${num_views}`}>{publisher}</li>
 						))}
 					</ul>
 				</div>
