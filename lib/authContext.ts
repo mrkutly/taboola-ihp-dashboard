@@ -5,6 +5,7 @@ const defaultContext: AuthContext = {
 	authentication: {
 		token: null,
 		expires: null,
+		isAuthorized: false,
 	},
 };
 

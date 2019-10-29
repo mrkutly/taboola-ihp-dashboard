@@ -59,6 +59,7 @@ type PublisherContext = {
 type Authentication = {
 	token: string;
 	expires: number;
+	isAuthorized: boolean;
 };
 
 type SetAuthentication = {

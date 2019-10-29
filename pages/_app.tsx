@@ -12,6 +12,7 @@ class MyApp extends App<AppInitialProps> {
 			description: '',
 		},
 		authentication: {
+			isAuthorized: false,
 			token: null,
 			expires: null,
 		},
