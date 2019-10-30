@@ -41,13 +41,14 @@ const ModeListItemStyles = styled.li`
 	background: ${(props: MLISProps): string => (props.isEven ? '#cacaca7d' : 'white')};
 `;
 
-const ButtonStyles = styled.button`
+export const ButtonStyles = styled.button`
 	background: none;
 	color: ${(props: SCProps): string => props.theme.colors.secondary};
 	letter-spacing: 0.5px;
 	border: none;
 	font-size: 1.5rem;
 	font-weight: 450;
+	cursor: pointer;
 `;
 
 export default ModeList;

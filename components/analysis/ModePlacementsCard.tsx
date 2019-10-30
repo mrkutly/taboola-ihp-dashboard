@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DividerStyles } from './ModeUsage';
 
 /* eslint-disable @typescript-eslint/camelcase */
 interface ModeDataProps {
@@ -39,30 +40,24 @@ const ModeDataCard: React.FunctionComponent<ModeDataProps> = (props) => {
 					</ul>
 				</div>
 			</CardStyles>
+			<DividerStyles />
 		</ListItemStyles>
 	);
 };
 
 const ListItemStyles = styled.li`
 	margin: 5vh auto;
-	h1 {
+
+	h2 {
 		margin-bottom: 0;
+		border-bottom: 2px solid ${(props: SCProps): string => props.theme.colors.primary};
+		width: max-content;
 	}
 `;
 
 const CardStyles = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	border-radius: 5px;
-	border: 1px solid ${(props: SCProps): string => props.theme.colors.lightGrey};
-
-	h2 {
-		margin-bottom: 0;
-	}
-
-	div {
-		padding: 0 20px 20px;
-	}
 `;
 
 export default ModeDataCard;

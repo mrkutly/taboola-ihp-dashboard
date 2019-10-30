@@ -49,7 +49,7 @@ const ModeUsage: React.FunctionComponent = () => {
 	);
 };
 
-const DividerStyles = styled.div`
+export const DividerStyles = styled.div`
 	height: 2px;
 	margin: 5vh 0;
 	background: ${(props: SCProps): string => props.theme.colors.accent};
