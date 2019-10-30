@@ -16,19 +16,19 @@ const ModeDataCard: React.FunctionComponent<ModeDataProps> = (props) => {
 			<h2>{modeName}</h2>
 			<CardStyles>
 				<div>
-					<h3>Mode Data</h3>
-					<ul>
-						<li>Number of placements: {num_placements}</li>
-						<li>Number of views: {num_views}</li>
-						<li>In loader: {loader || props.publisher}</li>
-					</ul>
-				</div>
-				<div>
 					<h3>Placements</h3>
 					<ul>
 						{placements.map((placement) => (
 							<li key={`${modeName}-${placement}-${num_views}`}>{placement}</li>
 						))}
+					</ul>
+				</div>
+				<div>
+					<h3>Mode Data</h3>
+					<ul>
+						<li>Number of placements: {num_placements}</li>
+						<li>Number of views: {num_views}</li>
+						<li>In loader: {loader || props.publisher}</li>
 					</ul>
 				</div>
 				<div>
@@ -47,6 +47,7 @@ const ModeDataCard: React.FunctionComponent<ModeDataProps> = (props) => {
 
 const ListItemStyles = styled.li`
 	margin: 5vh auto;
+	font-size: 1.6rem;
 
 	h2 {
 		margin-bottom: 0;
@@ -58,6 +59,11 @@ const ListItemStyles = styled.li`
 const CardStyles = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
+
+	ul {
+		list-style: none;
+		padding-left: 0;
+	}
 `;
 
 export default ModeDataCard;

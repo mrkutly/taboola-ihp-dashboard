@@ -1,21 +1,20 @@
 import styled from 'styled-components';
+import downloadCSV from '../../utils/DownloadCSV';
 
 interface ModeListProps {
 	modes: Mode[];
 }
 
 const ModeList: React.FunctionComponent<ModeListProps> = (props) => {
-	const downloadCSV = (): void => {
+	const handleClick = (): void => {
 		const rows = props.modes.map((mode) => [mode.MODE_NAMES, mode.number_views, mode.publisher_id]);
-		const formattedRows = rows.map((row) => row.join(',')).join('\n');
-		const csvContent = `data:text/csv;charset=utf-8,Mode Name, Number of Page Views, Publisher ID\n${formattedRows}`;
-		const encodedUri = encodeURI(csvContent);
-		window.open(encodedUri);
+		const headers = ['Mode Name', 'Number of Page Views', 'Publisher ID'];
+		downloadCSV({ rows, headers });
 	};
 
 	return (
 		<>
-			<ButtonStyles onClick={downloadCSV} type="button">
+			<ButtonStyles onClick={handleClick} type="button">
 				Download this list
 			</ButtonStyles>
 			<ul style={{ paddingLeft: 0 }}>

@@ -6,6 +6,7 @@ import PubContext from '../../lib/pubContext';
 import DataContext from '../../lib/dataContext';
 import modeViewsEffect from '../../lib/hooks/modeViewsEffect';
 import { ButtonStyles } from './ModeList';
+import downloadCSV from '../../utils/DownloadCSV';
 
 const ModeViews: React.FunctionComponent = () => {
 	const { publisher } = useContext(PubContext);
@@ -35,23 +36,21 @@ const ModeViews: React.FunctionComponent = () => {
 		},
 	);
 
-	const downloadCSV = (): void => {
+	const handleClick = (): void => {
 		const rows = data.modeViews.json_response.map(({ MODE, num_views, publisher_id }) => [
 			MODE,
 			num_views,
 			publisher_id,
 		]);
-		const formattedRows = rows.map((row) => row.join(',')).join('\n');
-		const csvContent = `data:text/csv;charset=utf-8,Mode Name, Number of Page Views, Publisher ID\n${formattedRows}`;
-		const encodedUri = encodeURI(csvContent);
-		window.open(encodedUri);
+		const headers = ['Mode Name', 'Number of Page Views', 'Publisher ID'];
+		downloadCSV({ rows, headers });
 	};
 
 	return (
 		<ContainerStyles id="page-views-per-mode">
 			<h1>{publisher.description}</h1>
 			<h2>Page views by mode between {data.modeViews.daterange}</h2>
-			<ButtonStyles type="button" onClick={downloadCSV}>
+			<ButtonStyles type="button" onClick={handleClick}>
 				Download this list
 			</ButtonStyles>
 			<GridStyles>
