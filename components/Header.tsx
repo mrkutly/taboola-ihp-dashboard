@@ -17,18 +17,6 @@ const pubNavLinks: NavLink[] = [
 		text: 'Publisher Search',
 		href: '/analysis',
 	},
-	{
-		text: 'Mode Page Views',
-		href: '/analysis/mode-views',
-	},
-	{
-		text: 'Mode Placements',
-		href: '/analysis/mode-placements',
-	},
-	{
-		text: 'Mode Usage',
-		href: '/analysis/mode-usage',
-	},
 ];
 
 const Header: React.FunctionComponent = () => {

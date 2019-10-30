@@ -1,53 +1,63 @@
 import styled from 'styled-components';
+import { useEffect, useState, useContext, Dispatch } from 'react';
+import Loading from '../Loading';
+import PubContext from '../../lib/pubContext';
+import DataContext from '../../lib/dataContext';
+import modeListEffect from '../../lib/hooks/modeListEffect';
+import { ListItemStyles, ButtonStyles } from './ModeUsageList';
 import downloadCSV from '../../utils/DownloadCSV';
 
-interface ModeListProps {
-	modes: Mode[];
-}
+const ModeList: React.FunctionComponent = () => {
+	const { publisher } = useContext(PubContext);
+	const { data, setData } = useContext(DataContext);
+	let [error, setError]: [Error, Dispatch<Error>] = [null, (): void => {}];
 
-const ModeList: React.FunctionComponent<ModeListProps> = (props) => {
+	if (!data.modeList) {
+		[error, setError] = useState();
+		useEffect(modeListEffect({ publisher, setData, setError, data }), []);
+	}
+
 	const handleClick = (): void => {
-		const rows = props.modes.map((mode) => [mode.MODE_NAMES, mode.number_views, mode.publisher_id]);
-		const headers = ['Mode Name', 'Number of Page Views', 'Publisher ID'];
+		const rows = data.modeList.map((mode) => [mode.mode_id, mode.MODE, `"${mode.mode_date}"`]);
+		const headers = ['Mode ID', 'Mode Name', 'Date Created'];
 		downloadCSV({ rows, headers });
 	};
 
+	if (error) return <p>{error.message}</p>;
+	if (!data.modeList) return <Loading message="getting mode list" />;
+
 	return (
 		<>
-			<ButtonStyles onClick={handleClick} type="button">
+			<h1>{publisher.description} - All Modes</h1>
+			<ButtonStyles type="button" onClick={handleClick}>
 				Download this list
 			</ButtonStyles>
+			<ListHeaders>
+				<div>Mode ID</div>
+				<div>Mode Name</div>
+				<div>Date Created</div>
+			</ListHeaders>
 			<ul style={{ paddingLeft: 0 }}>
-				{props.modes.map((mode, idx) => (
-					<ModeListItemStyles key={mode.MODE_NAMES} isEven={idx % 2 === 0}>
-						<div>{mode.MODE_NAMES}</div>
-						<div>{mode.number_views} page views</div>
-					</ModeListItemStyles>
-				))}
+				{data.modeList.map((mode, idx) => {
+					return (
+						<ListItemStyles isEven={idx % 2 === 0} key={mode.mode_id} gridColumns="1fr 2fr 2fr">
+							<div>{mode.mode_id}</div>
+							<div>{mode.MODE}</div>
+							<div>{mode.mode_date}</div>
+						</ListItemStyles>
+					);
+				})}
 			</ul>
 		</>
 	);
 };
 
-type MLISProps = SCProps & { isEven: boolean };
-
-const ModeListItemStyles = styled.li`
-	padding: 5px;
-	font-weight: 500;
+const ListHeaders = styled.div`
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	width: 800px;
-	background: ${(props: MLISProps): string => (props.isEven ? '#cacaca7d' : 'white')};
-`;
-
-export const ButtonStyles = styled.button`
-	background: none;
-	color: ${(props: SCProps): string => props.theme.colors.secondary};
-	letter-spacing: 0.5px;
-	border: none;
-	font-size: 1.5rem;
-	font-weight: 450;
-	cursor: pointer;
+	grid-template-columns: 1fr 2fr 2fr;
+	width: 900px;
+	font-weight: 600;
+	font-size: 1.8rem;
 `;
 
 export default ModeList;

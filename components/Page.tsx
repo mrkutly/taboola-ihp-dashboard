@@ -1,6 +1,8 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Header from './Header';
+import SideNav, { analysisNavLinks, sideNavWidth } from './analysis/SideNav';
 
 const theme: Theme = {
 	colors: {
@@ -46,14 +48,20 @@ const GlobalStyle = createGlobalStyle`
 		color: ${theme.colors.black};
 	}
 `;
-const Page: React.FunctionComponent<HOCProps> = (props) => (
-	<ThemeProvider theme={theme}>
-		<GlobalStyle />
-		<StyledPage>
-			<Header />
-			<Inner>{props.children}</Inner>
-		</StyledPage>
-	</ThemeProvider>
-);
+const Page: React.FunctionComponent<HOCProps> = (props) => {
+	const router = useRouter();
+	const analysisPaths = analysisNavLinks.map((link: NavLink) => link.href);
+	const shouldRenderSideNav = analysisPaths.includes(router.pathname);
+	return (
+		<ThemeProvider theme={theme}>
+			<GlobalStyle />
+			<StyledPage>
+				<Header />
+				{shouldRenderSideNav && <SideNav />}
+				<Inner style={shouldRenderSideNav ? { marginLeft: sideNavWidth } : {}}>{props.children}</Inner>
+			</StyledPage>
+		</ThemeProvider>
+	);
+};
 
 export default Page;

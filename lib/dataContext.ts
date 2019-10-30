@@ -6,6 +6,7 @@ const defaultContext: DataContext = {
 		modePlacement: null,
 		modeUsage: null,
 		modeViews: null,
+		modeList: null,
 	},
 };
 

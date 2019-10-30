@@ -25,6 +25,7 @@ class MyApp extends App<AppInitialProps> {
 			expires: null,
 		},
 		data: {
+			modeList: null,
 			modePlacement: null,
 			modeUsage: null,
 			modeViews: null,

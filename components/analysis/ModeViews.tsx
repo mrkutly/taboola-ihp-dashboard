@@ -5,7 +5,7 @@ import Loading from '../Loading';
 import PubContext from '../../lib/pubContext';
 import DataContext from '../../lib/dataContext';
 import modeViewsEffect from '../../lib/hooks/modeViewsEffect';
-import { ButtonStyles } from './ModeList';
+import { ButtonStyles } from './ModeUsageList';
 import downloadCSV from '../../utils/DownloadCSV';
 
 const ModeViews: React.FunctionComponent = () => {

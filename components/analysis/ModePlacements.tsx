@@ -6,7 +6,7 @@ import DataContext from '../../lib/dataContext';
 import ModePlacementsCard from './ModePlacementsCard';
 import Loading from '../Loading';
 import modePlacementsEffect from '../../lib/hooks/modePlacementsEffect';
-import { ButtonStyles } from './ModeList';
+import { ButtonStyles } from './ModeUsageList';
 import downloadCSV from '../../utils/DownloadCSV';
 
 const PageViews: React.FunctionComponent = () => {
@@ -42,7 +42,7 @@ const PageViews: React.FunctionComponent = () => {
 
 	return (
 		<ModeDataStyles>
-			<h1>Mode Data from {data.modePlacement.daterange}</h1>
+			<h1>Placements per Mode from {data.modePlacement.daterange}</h1>
 			<ButtonStyles onClick={handleClick}>Download this list</ButtonStyles>
 			<ModeListStyles>
 				{data.modePlacement.json_response.map((datum) => (

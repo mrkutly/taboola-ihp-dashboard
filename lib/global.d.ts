@@ -60,6 +60,7 @@ type Data = {
 	modePlacement?: LongAnalysisData;
 	modeUsage?: ModeComparisonData;
 	modeViews?: ShortAnalysisData;
+	modeList?: ListModesResponseDatum[];
 };
 
 type SetData = {
@@ -129,17 +130,19 @@ type ModeComparisonResponse = {
 };
 
 type ListModesResponseDatum = {
-	json_response: {
-		MODE: string;
-		mode_date: string;
-		mode_id: number;
-	};
+	MODE: string;
+	mode_date: string;
+	mode_id: number;
+};
+
+type ListModesResponseDataField = {
+	json_response: ListModesResponseDatum[];
 };
 
 type ListModesResponse = {
 	message: string;
 	state: string;
-	data: ListModesResponseDatum[];
+	data: ListModesResponseDataField[];
 };
 
 interface NavLink {

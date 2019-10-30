@@ -2,31 +2,27 @@
 import { EffectCallback, Dispatch } from 'react';
 import Adapter from '../../utils/Adapter';
 
-interface ModeDataEffectArgs {
+interface ModeListEffectArgs {
 	publisher: Publisher;
 	setData: SetData;
 	data: Data;
 	setError: Dispatch<Error>;
 }
 
-export default ({ publisher, setData, setError, data }: ModeDataEffectArgs): EffectCallback => {
+export default ({ publisher, setData, setError, data }: ModeListEffectArgs): EffectCallback => {
 	return (): void => {
 		async function getData(): Promise<void> {
 			try {
 				const pubId = Number(publisher.id);
-				const response: LongAnalysisResult | Error = await Adapter.getLongAnalysis(pubId);
+				const response: ListModesResponse | Error = await Adapter.getModes(pubId);
 
 				if (response instanceof Error) throw response;
 
-				const { json_response, daterange } = response.data[0];
-				const formattedDateRange = daterange.split(' - ').join(' and ');
+				const modeList = response.data[0].json_response;
 
 				setData({
 					...data,
-					modePlacement: {
-						json_response,
-						daterange: formattedDateRange,
-					},
+					modeList,
 				});
 			} catch (err) {
 				setError(err);

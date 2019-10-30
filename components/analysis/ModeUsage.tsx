@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useEffect, useState, useContext, Dispatch } from 'react';
 import Loading from '../Loading';
-import ModeList from './ModeList';
+import ModeList from './ModeUsageList';
 import pubContext from '../../lib/pubContext';
 import dataContext from '../../lib/dataContext';
 import modeUsageEffect from '../../lib/hooks/modeUsageEffect';
