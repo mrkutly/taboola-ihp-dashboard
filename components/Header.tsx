@@ -22,8 +22,12 @@ const pubNavLinks: NavLink[] = [
 		href: '/analysis/mode-views',
 	},
 	{
-		text: 'Mode Data',
-		href: '/analysis/mode-data',
+		text: 'Mode Placement Data',
+		href: '/analysis/mode-placements',
+	},
+	{
+		text: 'Mode Usage',
+		href: '/analysis/mode-usage',
 	},
 ];
 

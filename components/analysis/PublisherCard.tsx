@@ -12,7 +12,7 @@ const PublisherCard: React.FunctionComponent<PubCardProps> = ({ publisher, setPu
 
 	const goToPub = (): void => {
 		setPublisher(publisher);
-		router.push('/analysis/mode-views');
+		router.push('/analysis/mode-views-data');
 	};
 
 	return (

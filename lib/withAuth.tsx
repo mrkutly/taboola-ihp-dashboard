@@ -67,7 +67,7 @@ const withAuth = (WrappedComponent: React.FunctionComponent<{}>): React.Function
 		}
 	}, []);
 
-	if (!authentication.token) return <Loading />;
+	if (!authentication.token) return <Loading message="authenticating" />;
 	return <WrappedComponent {...props} />;
 };
 

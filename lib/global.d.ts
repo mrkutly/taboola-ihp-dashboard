@@ -56,6 +56,21 @@ type PublisherContext = {
 	setPublisher: SetPublisher;
 };
 
+type Data = {
+	modePlacement?: LongAnalysisData;
+	modeUsage?: ModeComparisonData;
+	modeViews?: ShortAnalysisData;
+};
+
+type SetData = {
+	(data: Data): void;
+};
+
+type DataContext = {
+	data: Data;
+	setData: SetData;
+};
+
 type Authentication = {
 	token: string;
 	expires: number;

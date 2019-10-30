@@ -1,6 +1,6 @@
 import ModeViews from '../../components/analysis/ModeViews';
 import withPublisher from '../../lib/withPublisher';
 
-const Analysis: React.FunctionComponent = () => <ModeViews />;
+const ModeViewsPage: React.FunctionComponent = () => <ModeViews />;
 
-export default withPublisher(Analysis);
+export default withPublisher(ModeViewsPage);

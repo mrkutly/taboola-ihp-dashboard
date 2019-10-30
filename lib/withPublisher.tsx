@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import PubContext from './pubContext';
+import Loading from '../components/Loading';
 
 const withPublisher = (WrappedComponent: React.FunctionComponent<{}>): React.FunctionComponent<{}> => (
 	props,
@@ -18,7 +19,7 @@ const withPublisher = (WrappedComponent: React.FunctionComponent<{}>): React.Fun
 		setLoading(false);
 	}, []);
 
-	if (loading) return <p>loading</p>;
+	if (loading) return <Loading message="checking session for publisher" />;
 
 	return <WrappedComponent {...props} />;
 };

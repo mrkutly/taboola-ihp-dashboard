@@ -3,60 +3,23 @@ import { Fragment, useContext, useEffect, useState, Dispatch } from 'react';
 import styled from 'styled-components';
 import Loading from '../Loading';
 import PubContext from '../../lib/pubContext';
-import Adapter from '../../utils/Adapter';
-
-interface PVAnalysisState {
-	dateRange: string;
-	loading: boolean;
-	error: Error;
-	analysisData: ShortAnalysisDataResponse[];
-}
-
-const defaultState: PVAnalysisState = {
-	dateRange: null,
-	loading: true,
-	error: null,
-	analysisData: null,
-};
+import DataContext from '../../lib/dataContext';
+import modeViewsEffect from '../../lib/hooks/modeViewsEffect';
 
 const ModeViews: React.FunctionComponent = () => {
-	const [state, setState]: [PVAnalysisState, Dispatch<PVAnalysisState>] = useState(defaultState);
 	const { publisher } = useContext(PubContext);
+	const { data, setData } = useContext(DataContext);
+	let [error, setError]: [Error, Dispatch<Error>] = [null, (): void => {}];
 
-	useEffect((): void => {
-		async function getData(): Promise<void> {
-			try {
-				const pubId = Number(publisher.id);
-				const response: ShortAnalysisResult | Error = await Adapter.getShortAnalysis(pubId);
+	if (!data.modeViews) {
+		[error, setError] = useState();
+		useEffect(modeViewsEffect({ publisher, setData, setError, data }), []);
+	}
 
-				if (response instanceof Error) throw new Error(response.message);
+	if (error) return <p>{error.message}</p>;
+	if (!data.modeViews) return <Loading />;
 
-				const { json_response, daterange } = response.data[0];
-				const formattedDateRange = daterange.split(' - ').join(' and ');
-				setState({
-					...state,
-					analysisData: json_response,
-					dateRange: formattedDateRange,
-					loading: false,
-				});
-			} catch (err) {
-				setState({
-					...state,
-					error: err,
-					loading: false,
-				});
-			}
-		}
-
-		getData();
-	}, []);
-
-	const { error, loading, analysisData, dateRange } = state;
-
-	if (loading) return <Loading />;
-	if (error) return <p>Error: {error.message}</p>;
-
-	const mappedData = analysisData.map(
+	const mappedData = data.modeViews.json_response.map(
 		(datum: ShortAnalysisDataResponse): JSX.Element => {
 			return (
 				<Fragment key={`${datum.MODE}-${datum.num_views}`}>
@@ -74,7 +37,7 @@ const ModeViews: React.FunctionComponent = () => {
 	return (
 		<ContainerStyles id="page-views-per-mode">
 			<h1>{publisher.description}</h1>
-			<h2>Page views by mode between {dateRange}</h2>
+			<h2>Page views by mode between {data.modeViews.daterange}</h2>
 			<GridStyles>
 				<div className="mode heading">Mode</div>
 				<div className="num-views heading">Page Views</div>

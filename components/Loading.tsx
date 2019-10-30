@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-const Loading: React.FunctionComponent = () => (
+interface LoadingProps {
+	message?: string;
+}
+
+const Loading: React.FunctionComponent<LoadingProps> = (props) => (
 	<LoadingStyles>
 		<div id="wrapper">
 			<div className="profile-main-loader">
@@ -11,7 +15,7 @@ const Loading: React.FunctionComponent = () => (
 				</div>
 			</div>
 		</div>
-		<p>loading...</p>
+		<p>{props.message || 'loading'}...</p>
 	</LoadingStyles>
 );
 
