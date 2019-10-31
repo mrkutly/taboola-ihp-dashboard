@@ -8,12 +8,12 @@ const links: NavLink[] = [
 		href: '/analysis',
 	},
 	{
-		text: 'Paamon',
-		href: '/paamon',
+		text: 'Paamon (Coming soon)',
+		href: '/',
 	},
 	{
-		text: 'Reporting',
-		href: '/reporting',
+		text: 'Reporting (Coming soon)',
+		href: '/',
 	},
 ];
 
