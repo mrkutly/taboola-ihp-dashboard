@@ -5,7 +5,7 @@ import PubContext from '../../lib/pubContext';
 import DataContext from '../../lib/dataContext';
 import modeListEffect from '../../lib/hooks/modeListEffect';
 import { ListItemStyles, ButtonStyles } from './ModeUsageList';
-import downloadCSV from '../../utils/DownloadCSV';
+import downloadCSV from '../../utils/downloadCSV';
 
 const ModeList: React.FunctionComponent = () => {
 	const { publisher } = useContext(PubContext);

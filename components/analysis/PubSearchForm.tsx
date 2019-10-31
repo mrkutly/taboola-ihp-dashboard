@@ -1,6 +1,6 @@
 import { useState, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import Adapter from '../../utils/Adapter';
+import Adapter from '../../lib/Adapter';
 import { PubSearchState } from './PubSearchPage';
 
 interface PubSearchFormProps {

@@ -6,7 +6,7 @@ import PubContext from '../../lib/pubContext';
 import DataContext from '../../lib/dataContext';
 import modeViewsEffect from '../../lib/hooks/modeViewsEffect';
 import { ButtonStyles, ListItemStyles } from './ModeUsageList';
-import downloadCSV from '../../utils/DownloadCSV';
+import downloadCSV from '../../utils/downloadCSV';
 import formatNumber from '../../utils/formatNumber';
 
 const ModeViews: React.FunctionComponent = () => {

@@ -7,7 +7,7 @@ import ModePlacementsCard from './ModePlacementsCard';
 import Loading from '../Loading';
 import modePlacementsEffect from '../../lib/hooks/modePlacementsEffect';
 import { ButtonStyles } from './ModeUsageList';
-import downloadCSV from '../../utils/DownloadCSV';
+import downloadCSV from '../../utils/downloadCSV';
 
 const PageViews: React.FunctionComponent = () => {
 	const { publisher } = useContext(PubContext);

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import downloadCSV from '../../utils/DownloadCSV';
+import downloadCSV from '../../utils/downloadCSV';
 import formatNumber from '../../utils/formatNumber';
 
 interface ModeListProps {
