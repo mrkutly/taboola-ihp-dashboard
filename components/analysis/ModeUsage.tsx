@@ -32,7 +32,7 @@ const ModeUsage: React.FunctionComponent = () => {
 	);
 
 	const unusedModesInKB = {
-		inflated: inactiveModes.length * 100,
+		inflated: inactiveModes.length * 22,
 		deflated: inactiveModes.length * 2,
 	};
 
