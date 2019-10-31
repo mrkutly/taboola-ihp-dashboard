@@ -10,7 +10,7 @@ interface NavLink {
 
 const pubNavLinks: NavLink[] = [
 	{
-		text: 'IHP Dashboard Home',
+		text: 'Implementation Health Dashboard',
 		href: '/',
 	},
 	{

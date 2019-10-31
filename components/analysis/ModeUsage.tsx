@@ -31,6 +31,11 @@ const ModeUsage: React.FunctionComponent = () => {
 		[[], []],
 	);
 
+	const unusedModesInKB = {
+		inflated: inactiveModes.length * 100,
+		deflated: inactiveModes.length * 2,
+	};
+
 	const sortedActiveModes = activeModes.sort((a, b) => b.number_views - a.number_views);
 	const sortedInactiveModes = inactiveModes.sort((a, b) => {
 		if (a.MODE_NAMES > b.MODE_NAMES) return 1;
@@ -42,6 +47,11 @@ const ModeUsage: React.FunctionComponent = () => {
 			<h1>{publisher.description}</h1>
 			<h2>Mode Usage between {data.modeUsage.daterange}</h2>
 			<h3>Inactive Modes</h3>
+			<p>
+				Deleting these will reduce the inflated loader size by{' '}
+				<strong style={{ color: 'green' }}>~{unusedModesInKB.inflated}kb</strong> and the deflated loader size by{' '}
+				<strong style={{ color: 'green' }}>~{unusedModesInKB.deflated}kb</strong>.
+			</p>
 			<ModeList modes={sortedInactiveModes} />
 			<DividerStyles />
 			<h3>Active Modes</h3>
