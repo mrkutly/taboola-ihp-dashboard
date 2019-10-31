@@ -22,7 +22,7 @@ const PubSearchPage: React.FunctionComponent = () => {
 
 	return (
 		<Container>
-			<h1>Find your publisher to get their analysis</h1>
+			<h1>Find your publisher to get their analysis.</h1>
 			<PubSearchForm setSearchState={setState} searchState={state} />
 			{error && <p>{error.message}</p>}
 			{loading && <Loading />}
