@@ -1,19 +1,19 @@
 {
 	"workbench.colorCustomizations": {
-		"activityBar.background": "#75ff75",
-		"activityBar.foreground": "#15202b",
-		"activityBar.inactiveForeground": "#15202b99",
-		"activityBarBadge.background": "#8080ff",
-		"activityBarBadge.foreground": "#15202b",
-		"titleBar.activeBackground": "#42ff42",
-		"titleBar.inactiveBackground": "#42ff4299",
-		"titleBar.activeForeground": "#15202b",
-		"titleBar.inactiveForeground": "#15202b99",
-		"statusBar.background": "#42ff42",
-		"statusBarItem.hoverBackground": "#0fff0f",
-		"statusBar.foreground": "#15202b"
+		"activityBar.background": "#1a1a1a",
+		"activityBar.foreground": "#e7e7e7",
+		"activityBar.inactiveForeground": "#e7e7e799",
+		"activityBarBadge.background": "#606020",
+		"activityBarBadge.foreground": "#e7e7e7",
+		"titleBar.activeBackground": "#000000",
+		"titleBar.inactiveBackground": "#00000099",
+		"titleBar.activeForeground": "#e7e7e7",
+		"titleBar.inactiveForeground": "#e7e7e799",
+		"statusBar.background": "#000000",
+		"statusBarItem.hoverBackground": "#1a1a1a",
+		"statusBar.foreground": "#e7e7e7"
 	},
-	"peacock.color": "#42ff42",
+	"peacock.color": "#000000",
 	"eslint.autoFixOnSave": true,
 	"eslint.validate": [
 		"javascript",

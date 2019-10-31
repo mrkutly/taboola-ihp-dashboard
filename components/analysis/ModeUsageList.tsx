@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import downloadCSV from '../../utils/DownloadCSV';
+import formatNumber from '../../utils/formatNumber';
 
 interface ModeListProps {
 	modes: Mode[];
@@ -21,7 +22,7 @@ const ModeList: React.FunctionComponent<ModeListProps> = (props) => {
 				{props.modes.map((mode, idx) => (
 					<ListItemStyles key={mode.MODE_NAMES} isEven={idx % 2 === 0} gridColumns="1fr 1fr">
 						<div>{mode.MODE_NAMES}</div>
-						<div>{mode.number_views} page views</div>
+						<div>{formatNumber(mode.number_views)} page views</div>
 					</ListItemStyles>
 				))}
 			</ul>

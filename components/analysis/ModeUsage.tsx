@@ -38,16 +38,28 @@ const ModeUsage: React.FunctionComponent = () => {
 	});
 
 	return (
-		<>
-			<h1>Mode Usage between {data.modeUsage.daterange}</h1>
-			<h2>Inactive Modes</h2>
+		<ModeUsageStyles id="mode-usage">
+			<h1>{publisher.description}</h1>
+			<h2>Mode Usage between {data.modeUsage.daterange}</h2>
+			<h3>Inactive Modes</h3>
 			<ModeList modes={sortedInactiveModes} />
 			<DividerStyles />
-			<h2>Active Modes</h2>
+			<h3>Active Modes</h3>
 			<ModeList modes={sortedActiveModes} />
-		</>
+		</ModeUsageStyles>
 	);
 };
+
+const ModeUsageStyles = styled.section`
+	h1,
+	h2 {
+		font-weight: 500;
+	}
+
+	h1 {
+		font-size: 3rem;
+	}
+`;
 
 export const DividerStyles = styled.div`
 	height: 2px;

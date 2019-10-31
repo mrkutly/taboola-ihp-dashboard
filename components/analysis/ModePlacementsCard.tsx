@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { DividerStyles } from './ModeUsage';
+import formatNumber from '../../utils/formatNumber';
 
 /* eslint-disable @typescript-eslint/camelcase */
 interface ModeDataProps {
@@ -13,10 +14,10 @@ const ModeDataCard: React.FunctionComponent<ModeDataProps> = (props) => {
 
 	return (
 		<ListItemStyles>
-			<h2>{modeName}</h2>
+			<h3>{modeName}</h3>
 			<CardStyles>
 				<div>
-					<h3>Placements</h3>
+					<h4>Placements</h4>
 					<ul>
 						{placements.map((placement) => (
 							<li key={`${modeName}-${placement}-${num_views}`}>{placement}</li>
@@ -24,15 +25,15 @@ const ModeDataCard: React.FunctionComponent<ModeDataProps> = (props) => {
 					</ul>
 				</div>
 				<div>
-					<h3>Mode Data</h3>
+					<h4>Mode Data</h4>
 					<ul>
 						<li>Number of placements: {num_placements}</li>
-						<li>Number of views: {num_views}</li>
+						<li>Number of views: {formatNumber(num_views)}</li>
 						<li>In loader: {loader || props.publisher}</li>
 					</ul>
 				</div>
 				<div>
-					<h3>Publishers</h3>
+					<h4>Publishers</h4>
 					<ul>
 						{publishers.map((publisher) => (
 							<li key={`${modeName}-${publisher}-${num_views}`}>{publisher}</li>
@@ -49,7 +50,8 @@ const ListItemStyles = styled.li`
 	margin: 5vh auto;
 	font-size: 1.6rem;
 
-	h2 {
+	h3 {
+		font-size: 2rem;
 		margin-bottom: 0;
 		border-bottom: 2px solid ${(props: SCProps): string => props.theme.colors.primary};
 		width: max-content;

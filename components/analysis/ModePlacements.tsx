@@ -20,7 +20,7 @@ const PageViews: React.FunctionComponent = () => {
 	}
 
 	if (error) return <p>Error: {error.message}</p>;
-	if (!data.modePlacement) return <Loading />;
+	if (!data.modePlacement) return <Loading message="getting each mode's placement data" />;
 
 	const handleClick = (): void => {
 		const rows = data.modePlacement.json_response.map((modeObj) => {
@@ -42,7 +42,8 @@ const PageViews: React.FunctionComponent = () => {
 
 	return (
 		<ModeDataStyles>
-			<h1>Placements per Mode from {data.modePlacement.daterange}</h1>
+			<h1>{publisher.description}</h1>
+			<h2>Placement Data Per Mode</h2>
 			<ButtonStyles onClick={handleClick}>Download this list</ButtonStyles>
 			<ModeListStyles>
 				{data.modePlacement.json_response.map((datum) => (
@@ -61,6 +62,15 @@ const ModeListStyles = styled.ul`
 
 const ModeDataStyles = styled.div`
 	max-width: 1200px;
+
+	h1,
+	h2 {
+		font-weight: 500;
+	}
+
+	h2 {
+		margin-bottom: 0;
+	}
 `;
 
 export default PageViews;

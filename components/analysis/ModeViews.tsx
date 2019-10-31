@@ -5,8 +5,9 @@ import Loading from '../Loading';
 import PubContext from '../../lib/pubContext';
 import DataContext from '../../lib/dataContext';
 import modeViewsEffect from '../../lib/hooks/modeViewsEffect';
-import { ButtonStyles } from './ModeUsageList';
+import { ButtonStyles, ListItemStyles } from './ModeUsageList';
 import downloadCSV from '../../utils/DownloadCSV';
+import formatNumber from '../../utils/formatNumber';
 
 const ModeViews: React.FunctionComponent = () => {
 	const { publisher } = useContext(PubContext);
@@ -19,19 +20,15 @@ const ModeViews: React.FunctionComponent = () => {
 	}
 
 	if (error) return <p>{error.message}</p>;
-	if (!data.modeViews) return <Loading />;
+	if (!data.modeViews) return <Loading message="getting page view data" />;
 
 	const mappedData = data.modeViews.json_response.map(
-		(datum: ShortAnalysisDataResponse): JSX.Element => {
+		(datum: ShortAnalysisDataResponse, idx: number): JSX.Element => {
 			return (
-				<Fragment key={`${datum.MODE}-${datum.num_views}`}>
-					<div className="mode" key={datum.MODE}>
-						{datum.MODE}
-					</div>
-					<div className="num-views" key={datum.num_views}>
-						{datum.num_views}
-					</div>
-				</Fragment>
+				<ListItemStyles key={`${datum.MODE}-${datum.num_views}`} gridColumns="1fr 1fr" isEven={idx % 2 === 0}>
+					<div key={datum.MODE}>{datum.MODE}</div>
+					<div key={datum.num_views}>{formatNumber(datum.num_views)}</div>
+				</ListItemStyles>
 			);
 		},
 	);
@@ -56,19 +53,22 @@ const ModeViews: React.FunctionComponent = () => {
 			<GridStyles>
 				<div className="mode heading">Mode</div>
 				<div className="num-views heading">Page Views</div>
-				{mappedData}
 			</GridStyles>
+			<ul style={{ paddingLeft: 0 }}>{mappedData}</ul>
 		</ContainerStyles>
 	);
 };
 
 const ContainerStyles = styled.section`
-	max-width: 800px;
-	margin: 0 auto;
+	width: 900px;
 
 	h1,
 	h2 {
 		font-weight: 500;
+	}
+
+	h2 {
+		margin-bottom: 0;
 	}
 
 	h1 {
@@ -78,30 +78,17 @@ const ContainerStyles = styled.section`
 
 const GridStyles = styled.div`
 	display: grid;
-	grid-template-columns: 2fr 1fr;
+	grid-template-columns: 1fr 1fr;
 	font-size: 1.6rem;
+	margin-top: 5vh;
 
 	div {
-		padding-left: 10px;
 		color: ${(props: SCProps): string => props.theme.colors.primary};
 	}
 
 	.heading {
 		font-weight: 500;
 		font-size: 1.8rem;
-		color: ${(props: SCProps): string => props.theme.colors.secondary};
-	}
-
-	.mode {
-		grid-column-start: 1;
-	}
-
-	.num-views {
-		grid-column-start: 2;
-	}
-
-	div {
-		border: 1px solid ${(props: SCProps): string => props.theme.colors.lightGrey};
 	}
 `;
 

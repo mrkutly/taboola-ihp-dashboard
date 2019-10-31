@@ -27,8 +27,9 @@ const ModeList: React.FunctionComponent = () => {
 	if (!data.modeList) return <Loading message="getting mode list" />;
 
 	return (
-		<>
-			<h1>{publisher.description} - All Modes</h1>
+		<ModeListPageStyles id="all-modes-list">
+			<h1>{publisher.description}</h1>
+			<h2>All Modes</h2>
 			<ButtonStyles type="button" onClick={handleClick}>
 				Download this list
 			</ButtonStyles>
@@ -48,9 +49,19 @@ const ModeList: React.FunctionComponent = () => {
 					);
 				})}
 			</ul>
-		</>
+		</ModeListPageStyles>
 	);
 };
+
+const ModeListPageStyles = styled.section`
+	h1,
+	h2 {
+		font-weight: 500;
+	}
+	h1 {
+		font-size: 3rem;
+	}
+`;
 
 const ListHeaders = styled.div`
 	display: grid;
@@ -58,6 +69,7 @@ const ListHeaders = styled.div`
 	width: 900px;
 	font-weight: 600;
 	font-size: 1.8rem;
+	margin-top: 5vh;
 `;
 
 export default ModeList;

@@ -4,19 +4,19 @@ import { useRouter } from 'next/router';
 
 export const analysisNavLinks: NavLink[] = [
 	{
-		text: 'Mode List',
+		text: 'List All Modes',
 		href: '/analysis/mode-list',
 	},
 	{
-		text: 'Mode Page Views',
+		text: 'Page Views',
 		href: '/analysis/mode-views',
 	},
 	{
-		text: 'Mode Placements',
+		text: 'Placements',
 		href: '/analysis/mode-placements',
 	},
 	{
-		text: 'Mode Usage',
+		text: 'Usage',
 		href: '/analysis/mode-usage',
 	},
 ];
@@ -25,6 +25,7 @@ const SideNav: React.FunctionComponent = () => {
 	const router = useRouter();
 	return (
 		<SideNavStyles>
+			<h4>Mode reports</h4>
 			<ul>
 				{analysisNavLinks.map((link: NavLink) => (
 					<li key={link.text} className={router.pathname === link.href ? 'active' : null}>
@@ -41,13 +42,17 @@ const SideNav: React.FunctionComponent = () => {
 export const sideNavWidth = '250px';
 
 const SideNavStyles = styled.nav`
+	background-color: #00000011;
+	height: calc(99vh - 54px);
 	display: flex;
 	flex-direction: column;
 	position: fixed;
 	left: 0;
 	width: ${sideNavWidth};
 	font-size: 1.6rem;
-
+	h4 {
+		padding-left: 40px;
+	}
 	li,
 	a {
 		margin-top: 2vh;
