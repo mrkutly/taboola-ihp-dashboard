@@ -59,6 +59,10 @@ const ModeUsageStyles = styled.section`
 	h1 {
 		font-size: 3rem;
 	}
+
+	h3 {
+		margin-bottom: 0;
+	}
 `;
 
 export const DividerStyles = styled.div`
