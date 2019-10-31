@@ -61,6 +61,10 @@ const ModeListPageStyles = styled.section`
 	h1 {
 		font-size: 3rem;
 	}
+
+	h2 {
+		margin-bottom: 0;
+	}
 `;
 
 const ListHeaders = styled.div`
