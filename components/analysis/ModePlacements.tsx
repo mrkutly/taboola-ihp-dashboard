@@ -24,10 +24,10 @@ const PageViews: React.FunctionComponent = () => {
 
 	const handleClick = (): void => {
 		const rows = data.modePlacement.json_response.map((modeObj) => {
-			const { mode, num_placements, num_publishers, num_views, placements, publishers } = modeObj;
+			const { without_abp, num_placements, num_publishers, num_views, placements, publishers } = modeObj;
 			const formattedPlacements = `"${placements.join(', ')}"`;
 			const formattedPublishers = `"${publishers.join(', ')}"`;
-			return [mode, num_placements, num_publishers, num_views, formattedPlacements, formattedPublishers];
+			return [without_abp, num_placements, num_publishers, num_views, formattedPlacements, formattedPublishers];
 		});
 		const headers = [
 			'Mode Name',
