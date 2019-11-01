@@ -4,8 +4,8 @@ import Loading from '../Loading';
 import PubContext from '../../lib/pubContext';
 import DataContext from '../../lib/dataContext';
 import modeListEffect from '../../lib/hooks/modeListEffect';
-import { ListItemStyles, ButtonStyles } from './ModeUsageList';
-import downloadCSV from '../../utils/downloadCSV';
+import { ListItemStyles, DownloadLinkStyles } from './ModeUsageList';
+import makeCSVHref from '../../utils/makeCSVHref';
 
 const ModeList: React.FunctionComponent = () => {
 	const { publisher } = useContext(PubContext);
@@ -17,10 +17,10 @@ const ModeList: React.FunctionComponent = () => {
 		useEffect(modeListEffect({ publisher, setData, setError, data }), []);
 	}
 
-	const handleClick = (): void => {
+	const makeHref = (): string => {
 		const rows = data.modeList.map((mode) => [mode.mode_id, mode.MODE, `"${mode.mode_date}"`]);
 		const headers = ['Mode ID', 'Mode Name', 'Date Created'];
-		downloadCSV({ rows, headers });
+		return makeCSVHref({ rows, headers });
 	};
 
 	if (error) return <p>{error.message}</p>;
@@ -30,9 +30,9 @@ const ModeList: React.FunctionComponent = () => {
 		<ModeListPageStyles id="all-modes-list">
 			<h1>{publisher.description}</h1>
 			<h2>All Modes</h2>
-			<ButtonStyles type="button" onClick={handleClick}>
+			<DownloadLinkStyles href={makeHref()} download={`${publisher.name}_all-modes-list.csv`}>
 				Download this list
-			</ButtonStyles>
+			</DownloadLinkStyles>
 			<ListHeaders>
 				<div>Mode ID</div>
 				<div>Mode Name</div>

@@ -1,23 +1,32 @@
 import styled from 'styled-components';
-import downloadCSV from '../../utils/downloadCSV';
+import makeCSVHref from '../../utils/makeCSVHref';
 import formatNumber from '../../utils/formatNumber';
 
 interface ModeListProps {
 	modes: Mode[];
+	pubName: string;
+	active?: boolean;
 }
 
 const ModeList: React.FunctionComponent<ModeListProps> = (props) => {
-	const handleClick = (): void => {
-		const rows = props.modes.map((mode) => [mode.MODE_NAMES, mode.number_views, mode.publisher_id]);
+	const makeHref = (): string => {
+		const rows = props.modes.map((mode) => [
+			mode.MODE_NAMES,
+			`"${formatNumber(mode.number_views)}"`,
+			mode.publisher_id,
+		]);
 		const headers = ['Mode Name', 'Number of Page Views', 'Publisher ID'];
-		downloadCSV({ rows, headers });
+		return makeCSVHref({ rows, headers });
 	};
 
 	return (
 		<>
-			<ButtonStyles onClick={handleClick} type="button">
+			<DownloadLinkStyles
+				href={makeHref()}
+				download={`${props.pubName}_${props.active ? 'active-' : 'inactive-'}mode-usage.csv`}
+			>
 				Download this list
-			</ButtonStyles>
+			</DownloadLinkStyles>
 			<ul style={{ paddingLeft: 0 }}>
 				{props.modes.map((mode, idx) => (
 					<ListItemStyles key={mode.MODE_NAMES} isEven={idx % 2 === 0} gridColumns="1fr 1fr">
@@ -44,15 +53,13 @@ export const ListItemStyles = styled.li`
 	background: ${(props: LISProps): string => (props.isEven ? '#cacaca7d' : 'white')};
 `;
 
-export const ButtonStyles = styled.button`
-	background: none;
+export const DownloadLinkStyles = styled.a`
 	color: ${(props: SCProps): string => props.theme.colors.secondary};
 	letter-spacing: 0.5px;
-	border: none;
 	font-size: 1.5rem;
 	font-weight: 450;
 	padding: 0;
-	cursor: pointer;
+	/* cursor: pointer; */
 `;
 
 export default ModeList;

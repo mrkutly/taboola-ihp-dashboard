@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import { Fragment, useContext, useEffect, useState, Dispatch } from 'react';
+import { useContext, useEffect, useState, Dispatch } from 'react';
 import styled from 'styled-components';
 import Loading from '../Loading';
 import PubContext from '../../lib/pubContext';
 import DataContext from '../../lib/dataContext';
 import modeViewsEffect from '../../lib/hooks/modeViewsEffect';
-import { ButtonStyles, ListItemStyles } from './ModeUsageList';
-import downloadCSV from '../../utils/downloadCSV';
+import { DownloadLinkStyles, ListItemStyles } from './ModeUsageList';
+import makeCSVHref from '../../utils/makeCSVHref';
 import formatNumber from '../../utils/formatNumber';
 
 const ModeViews: React.FunctionComponent = () => {
@@ -33,23 +33,23 @@ const ModeViews: React.FunctionComponent = () => {
 		},
 	);
 
-	const handleClick = (): void => {
+	const makeHref = (): string => {
 		const rows = data.modeViews.json_response.map(({ MODE, num_views, publisher_id }) => [
 			MODE,
-			num_views,
+			`"${formatNumber(num_views)}"`,
 			publisher_id,
 		]);
 		const headers = ['Mode Name', 'Number of Page Views', 'Publisher ID'];
-		downloadCSV({ rows, headers });
+		return makeCSVHref({ rows, headers });
 	};
 
 	return (
 		<ContainerStyles id="page-views-per-mode">
 			<h1>{publisher.description}</h1>
 			<h2>Page views by mode between {data.modeViews.daterange}</h2>
-			<ButtonStyles type="button" onClick={handleClick}>
+			<DownloadLinkStyles href={makeHref()} download={`${publisher.name}_mode-page-views.csv`}>
 				Download this list
-			</ButtonStyles>
+			</DownloadLinkStyles>
 			<GridStyles>
 				<div className="mode heading">Mode</div>
 				<div className="num-views heading">Page Views</div>

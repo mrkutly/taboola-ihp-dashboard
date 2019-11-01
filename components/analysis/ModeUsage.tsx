@@ -47,15 +47,15 @@ const ModeUsage: React.FunctionComponent = () => {
 			<h1>{publisher.description}</h1>
 			<h2>Mode Usage between {data.modeUsage.daterange}</h2>
 			<h3>Inactive Modes</h3>
-			<p>
-				Deleting these will reduce the inflated loader size by{' '}
-				<strong style={{ color: 'green' }}>~{unusedModesInKB.inflated}kb</strong> and the deflated loader size by{' '}
-				<strong style={{ color: 'green' }}>~{unusedModesInKB.deflated}kb</strong>.
+			<p className="tooltip">
+				<span>Note:</span>
+				Deleting these will reduce the inflated loader size by <strong>~{unusedModesInKB.inflated}kb</strong> and the
+				deflated loader size by <strong>~{unusedModesInKB.deflated}kb</strong>.
 			</p>
-			<ModeList modes={sortedInactiveModes} />
+			<ModeList modes={sortedInactiveModes} pubName={publisher.name} />
 			<DividerStyles />
 			<h3>Active Modes</h3>
-			<ModeList modes={sortedActiveModes} />
+			<ModeList modes={sortedActiveModes} pubName={publisher.name} active />
 		</ModeUsageStyles>
 	);
 };
@@ -72,6 +72,21 @@ const ModeUsageStyles = styled.section`
 
 	h3 {
 		margin-bottom: 0;
+	}
+
+	.tooltip {
+		/* letter-spacing: 1px; */
+		font-weight: 500;
+		font-size: 1.6rem;
+
+		span {
+			color: ${(props: SCProps): string => props.theme.colors.secondary};
+			margin-right: 10px;
+		}
+
+		strong {
+			color: green;
+		}
 	}
 `;
 

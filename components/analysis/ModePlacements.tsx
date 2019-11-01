@@ -6,8 +6,9 @@ import DataContext from '../../lib/dataContext';
 import ModePlacementsCard from './ModePlacementsCard';
 import Loading from '../Loading';
 import modePlacementsEffect from '../../lib/hooks/modePlacementsEffect';
-import { ButtonStyles } from './ModeUsageList';
-import downloadCSV from '../../utils/downloadCSV';
+import { DownloadLinkStyles } from './ModeUsageList';
+import makeCSVHref from '../../utils/makeCSVHref';
+import formatNumber from '../../utils/formatNumber';
 
 const PageViews: React.FunctionComponent = () => {
 	const { publisher } = useContext(PubContext);
@@ -22,12 +23,19 @@ const PageViews: React.FunctionComponent = () => {
 	if (error) return <p>Error: {error.message}</p>;
 	if (!data.modePlacement) return <Loading message="getting each mode's placement data" />;
 
-	const handleClick = (): void => {
+	const makeHref = (): string => {
 		const rows = data.modePlacement.json_response.map((modeObj) => {
 			const { without_abp, num_placements, num_publishers, num_views, placements, publishers } = modeObj;
 			const formattedPlacements = `"${placements.join(', ')}"`;
 			const formattedPublishers = `"${publishers.join(', ')}"`;
-			return [without_abp, num_placements, num_publishers, num_views, formattedPlacements, formattedPublishers];
+			return [
+				without_abp,
+				num_placements,
+				num_publishers,
+				`"${formatNumber(num_views)}"`,
+				formattedPlacements,
+				formattedPublishers,
+			];
 		});
 		const headers = [
 			'Mode Name',
@@ -37,14 +45,16 @@ const PageViews: React.FunctionComponent = () => {
 			'Placement Names',
 			'Publishers',
 		];
-		downloadCSV({ rows, headers });
+		return makeCSVHref({ rows, headers });
 	};
 
 	return (
 		<ModeDataStyles>
 			<h1>{publisher.description}</h1>
 			<h2>Placement Data Per Mode</h2>
-			<ButtonStyles onClick={handleClick}>Download this list</ButtonStyles>
+			<DownloadLinkStyles href={makeHref()} download={`${publisher.name}_mode-placements.csv`}>
+				Download this list
+			</DownloadLinkStyles>
 			<ModeListStyles>
 				{data.modePlacement.json_response.map((datum) => (
 					<ModePlacementsCard modeData={datum} publisher={publisher.name} key={`${datum.mode}-${datum.num_views}`} />
