@@ -39,7 +39,7 @@ const IndexPageStyles = styled.div`
 		padding: 10px;
 
 		&:hover {
-			color: ${(props: SCProps): string => props.theme.colors.secondary};
+			color: ${(props: PropsLib.SCProps): string => props.theme.colors.secondary};
 		}
 	}
 `;

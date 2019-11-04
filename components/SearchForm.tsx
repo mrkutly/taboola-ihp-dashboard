@@ -13,7 +13,7 @@ const fetchPublishers = async (idQuery): Promise<Publisher[] | Error> => {
 	try {
 		const response = await Adapter.getPublisher(Number(idQuery));
 
-		if (!response || !response.data) {
+		if (response instanceof Error || !response || !response.data) {
 			throw new Error('There was a problem connecting to the database.');
 		}
 
@@ -31,7 +31,7 @@ const fetchNetworks = async (networkId): Promise<Publisher[] | Error> => {
 	try {
 		const response = await Adapter.getNetwork(Number(networkId));
 
-		if (!response || !response.data) {
+		if (response instanceof Error || !response || !response.data) {
 			throw new Error('There was a problem connecting to the database.');
 		}
 
@@ -96,12 +96,12 @@ const SearchForm: React.FunctionComponent<SearchFormProps> = ({ setSearchState, 
 };
 
 const FormStyles = styled.form`
-	color: ${(props: SCProps): string => props.theme.colors.secondary};
+	color: ${(props: PropsLib.SCProps): string => props.theme.colors.secondary};
 
 	fieldset {
 		padding: 2vh 2vw;
 		border-radius: 5px;
-		border: 1px solid ${(props: SCProps): string => props.theme.colors.primary};
+		border: 1px solid ${(props: PropsLib.SCProps): string => props.theme.colors.primary};
 	}
 
 	input {
@@ -109,21 +109,21 @@ const FormStyles = styled.form`
 		font-size: 1.5rem;
 		padding: 4px;
 		border-radius: 5px;
-		border: 1px solid ${(props: SCProps): string => props.theme.colors.primary};
+		border: 1px solid ${(props: PropsLib.SCProps): string => props.theme.colors.primary};
 	}
 
 	button {
-		background: ${(props: SCProps): string => props.theme.colors.secondary};
-		color: ${(props: SCProps): string => props.theme.colors.background};
+		background: ${(props: PropsLib.SCProps): string => props.theme.colors.secondary};
+		color: ${(props: PropsLib.SCProps): string => props.theme.colors.background};
 		border-radius: 5px;
-		border: 1px solid ${(props: SCProps): string => props.theme.colors.background};
+		border: 1px solid ${(props: PropsLib.SCProps): string => props.theme.colors.background};
 		font-size: 1.5rem;
 		padding: 4px;
 		margin-top: 10px;
 		display: block;
 
 		&[disabled] {
-			background: ${(props: SCProps): string => props.theme.colors.lightGrey};
+			background: ${(props: PropsLib.SCProps): string => props.theme.colors.lightGrey};
 		}
 	}
 `;

@@ -1,166 +1,185 @@
-type HOCProps = {
-	children: Element & React.ReactPortal & React.ReactNodeArray | React.ReactNode;
-};
-
-type Theme = {
-	colors: {
-		primary: string;
-		secondary: string;
-		accent: string;
-		background: string;
-		black: string;
-		lightGrey: string;
+/** Props for Styled Components and Higher Order Components */
+declare namespace PropsLib {
+	type HOCProps = {
+		children: Element & React.ReactPortal & React.ReactNodeArray | React.ReactNode;
 	};
-	maxWidth: string;
-};
 
-type SCProps = {
-	theme: Theme;
-};
+	type Theme = {
+		colors: {
+			primary: string;
+			secondary: string;
+			accent: string;
+			background: string;
+			black: string;
+			lightGrey: string;
+		};
+		maxWidth: string;
+	};
 
-type ShortAnalysisDataResponse = {
-	MODE: string;
-	num_views: number;
-	publisher_id: number;
-};
+	type SCProps = {
+		theme: Theme;
+	};
+}
 
-type ShortAnalysisData = {
-	daterange: string;
-	json_response: ShortAnalysisDataResponse[];
-};
+/** Utility Interfaces */
 
-type ShortAnalysisResult = {
-	message: string;
-	state: string;
-	data: ShortAnalysisData[];
-};
+interface NavLink {
+	text: string;
+	href: string;
+}
 
 type Publisher = {
 	id: string;
 	name: string;
 	description: string;
 };
+/** Types for Context and global State */
+declare namespace AppContextTypes {
+	declare function SetPublisher(publisher: Publisher): void;
+	type SetPublisher = SetPublisher;
 
-type AllPublishersResponse = {
-	data: {
-		allPublishers: Publisher[];
+	type PublisherContext = {
+		publisher: Publisher;
+		setPublisher: SetPublisher;
 	};
-};
 
-type AllNetworksResponse = {
-	data: {
-		allNetworks: Publisher[];
+	declare function SetNetwork(publisher: Publisher): void;
+	type SetNetwork = SetNetwork;
+
+	type NetworkContext = {
+		network: Publisher;
+		setNetwork: SetNetwork;
 	};
-};
 
-type SetPublisher = {
-	(publisher: Publisher): void;
-};
+	type Data = {
+		modePlacement?: LongAnalysisData;
+		modeUsage?: ModeComparisonData;
+		modeViews?: ShortAnalysisData;
+		modeList?: ListModesResponseDatum[];
+	};
 
-type PublisherContext = {
-	publisher: Publisher;
-	setPublisher: SetPublisher;
-};
+	declare function SetData(data: Data): void;
+	type SetData = SetData;
 
-type SetNetwork = {
-	(publisher: Publisher): void;
-};
+	type DataContext = {
+		data: Data;
+		setData: SetData;
+	};
 
-type NetworkContext = {
-	network: Publisher;
-	setNetwork: SetNetwork;
-};
+	type Authentication = {
+		token: string;
+		expires: number;
+		isAuthorized: boolean;
+	};
 
-type Data = {
-	modePlacement?: LongAnalysisData;
-	modeUsage?: ModeComparisonData;
-	modeViews?: ShortAnalysisData;
-	modeList?: ListModesResponseDatum[];
-};
+	declare function SetAuthentication(authentication: Authentication): void;
+	type SetAuthentication = SetAuthentication;
 
-type SetData = {
-	(data: Data): void;
-};
+	type AuthContext = {
+		authentication: Authentication;
+		setAuthentication: setAuthentication;
+	};
+}
 
-type DataContext = {
-	data: Data;
-	setData: SetData;
-};
+/** Publisher-Level Adapter responses */
+declare namespace AdapterTypes {
+	type ShortAnalysisDataResponse = {
+		MODE: string;
+		num_views: number;
+		publisher_id: number;
+	};
 
-type Authentication = {
-	token: string;
-	expires: number;
-	isAuthorized: boolean;
-};
+	type ShortAnalysisData = {
+		daterange: string;
+		json_response: ShortAnalysisDataResponse[];
+	};
 
-type SetAuthentication = {
-	(authentication: Authentication): void;
-};
+	type ShortAnalysisResult = {
+		message: string;
+		state: string;
+		data: ShortAnalysisData[];
+	};
 
-type AuthContext = {
-	authentication: Authentication;
-	setAuthentication: setAuthentication;
-};
+	type AllPublishersResponse = {
+		data: {
+			allPublishers: Publisher[];
+		};
+	};
 
-type LongAnalysisDataResponse = {
-	mode: string;
-	num_placements: number;
-	num_publishers: number;
-	num_views: number;
-	placements: string[];
-	publishers: string[];
-	without_abp: string;
-};
+	type AllNetworksResponse = {
+		data: {
+			allNetworks: Publisher[];
+		};
+	};
 
-type LongAnalysisData = {
-	daterange: string;
-	json_response: LongAnalysisDataResponse[];
-};
+	type LongAnalysisDataResponse = {
+		mode: string;
+		num_placements: number;
+		num_publishers: number;
+		num_views: number;
+		placements: string[];
+		publishers: string[];
+		without_abp: string;
+	};
 
-type LongAnalysisResult = {
-	message: string;
-	state: string;
-	data: LongAnalysisData[];
-};
+	type LongAnalysisData = {
+		daterange: string;
+		json_response: LongAnalysisDataResponse[];
+	};
 
-type Mode = {
-	MODE_NAMES: string;
-	MODE_TYPE: string;
-	count: number;
-	number_views: number;
-	publisher_id: number;
-};
+	type LongAnalysisResult = {
+		message: string;
+		state: string;
+		data: LongAnalysisData[];
+	};
 
-type ModeComparisonData = {
-	daterange: string;
-	all_modes: Mode[];
-	active_modes: string[];
-	inactive_modes: string[];
-};
+	type Mode = {
+		MODE_NAMES: string;
+		MODE_TYPE: string;
+		count: number;
+		number_views: number;
+		publisher_id: number;
+	};
 
-type ModeComparisonResponse = {
-	message: string;
-	state: string;
-	data: ModeComparisonData[];
-};
+	type ModeComparisonData = {
+		daterange: string;
+		all_modes: Mode[];
+		active_modes: string[];
+		inactive_modes: string[];
+	};
 
-type ListModesResponseDatum = {
-	MODE: string;
-	mode_date: string;
-	mode_id: number;
-};
+	type ModeComparisonResponse = {
+		message: string;
+		state: string;
+		data: ModeComparisonData[];
+	};
 
-type ListModesResponseDataField = {
-	json_response: ListModesResponseDatum[];
-};
+	type ListModesResponseDatum = {
+		MODE: string;
+		mode_date: string;
+		mode_id: number;
+	};
 
-type ListModesResponse = {
-	message: string;
-	state: string;
-	data: ListModesResponseDataField[];
-};
+	type ListModesResponseDataField = {
+		json_response: ListModesResponseDatum[];
+	};
 
-interface NavLink {
-	text: string;
-	href: string;
+	type ListModesResponse = {
+		message: string;
+		state: string;
+		data: ListModesResponseDataField[];
+	};
+
+	/** Network-Level Adapter responses */
+	type NetworkArchitectureResponseData = {
+		daterange: string;
+		network_publishers: string[];
+		data: LongAnalysisDataResponse[];
+	};
+
+	type NetworkArchitectureResponse = {
+		message: string;
+		state: string;
+		data: NetworkArchitectureResponseData[];
+	};
 }

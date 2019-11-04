@@ -4,8 +4,8 @@ import Adapter from '../Adapter';
 
 interface ModeUsageEffectArgs {
 	publisher: Publisher;
-	setData: SetData;
-	data: Data;
+	setData: AppContextTypes.SetData;
+	data: AppContextTypes.Data;
 	setError: Dispatch<Error>;
 }
 
@@ -14,7 +14,7 @@ export default ({ publisher, setData, setError, data }: ModeUsageEffectArgs): Ef
 		async function getModeActivity(): Promise<void> {
 			try {
 				const publisherId = Number(publisher.id);
-				const res: ModeComparisonResponse | Error = await Adapter.getModesComparison(publisherId);
+				const res: AdapterTypes.ModeComparisonResponse | Error = await Adapter.getModesComparison(publisherId);
 
 				if (res instanceof Error) throw res;
 

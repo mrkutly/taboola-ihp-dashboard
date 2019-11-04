@@ -23,7 +23,7 @@ const ModeViews: React.FunctionComponent = () => {
 	if (!data.modeViews) return <Loading message="getting page view data" />;
 
 	const mappedData = data.modeViews.json_response.map(
-		(datum: ShortAnalysisDataResponse, idx: number): JSX.Element => {
+		(datum: AdapterTypes.ShortAnalysisDataResponse, idx: number): JSX.Element => {
 			return (
 				<ListItemStyles key={`${datum.MODE}-${datum.num_views}`} gridColumns="1fr 1fr" isEven={idx % 2 === 0}>
 					<div key={datum.MODE}>{datum.MODE}</div>
@@ -83,7 +83,7 @@ const GridStyles = styled.div`
 	margin-top: 5vh;
 
 	div {
-		color: ${(props: SCProps): string => props.theme.colors.primary};
+		color: ${(props: PropsLib.SCProps): string => props.theme.colors.primary};
 	}
 
 	.heading {

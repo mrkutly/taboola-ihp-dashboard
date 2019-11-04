@@ -13,7 +13,7 @@ const headers: HeadersInitInterface = {
 };
 
 const Adapter = {
-	async getShortAnalysis(publisherId: number): Promise<ShortAnalysisResult | Error> {
+	async getShortAnalysis(publisherId: number): Promise<AdapterTypes.ShortAnalysisResult | Error> {
 		try {
 			const res = await fetch(`${process.env.BACKEND_URL}/impl-short-pv-reader?publisher=${publisherId}`, {
 				method: 'GET',
@@ -24,7 +24,7 @@ const Adapter = {
 			return error;
 		}
 	},
-	async getLongAnalysis(publisherId: number): Promise<LongAnalysisResult | Error> {
+	async getLongAnalysis(publisherId: number): Promise<AdapterTypes.LongAnalysisResult | Error> {
 		try {
 			const res = await fetch(`${process.env.BACKEND_URL}/impl-pv-reader?publisher=${publisherId}`, {
 				method: 'GET',
@@ -35,7 +35,7 @@ const Adapter = {
 			return error;
 		}
 	},
-	async getModes(publisherId: number): Promise<ListModesResponse> {
+	async getModes(publisherId: number): Promise<AdapterTypes.ListModesResponse | Error> {
 		try {
 			const res = await fetch(`${process.env.BACKEND_URL}/impl-list-modes?publisher=${publisherId}`, {
 				method: 'GET',
@@ -46,7 +46,7 @@ const Adapter = {
 			return error;
 		}
 	},
-	async getModesComparison(publisherId: number): Promise<ModeComparisonResponse> {
+	async getModesComparison(publisherId: number): Promise<AdapterTypes.ModeComparisonResponse | Error> {
 		try {
 			const res = await fetch(`${process.env.BACKEND_URL}/impl-compare-modes?publisher=${publisherId}`);
 			return res.json();
@@ -54,7 +54,7 @@ const Adapter = {
 			return error;
 		}
 	},
-	async getPublisher(publisherId: number): Promise<AllPublishersResponse> {
+	async getPublisher(publisherId: number): Promise<AdapterTypes.AllPublishersResponse | Error> {
 		try {
 			const res = await fetch('http://ps001.taboolasyndication.com:7777', {
 				method: 'POST',
@@ -78,7 +78,7 @@ const Adapter = {
 			return error;
 		}
 	},
-	async getNetwork(networkId: number): Promise<AllNetworksResponse> {
+	async getNetwork(networkId: number): Promise<AdapterTypes.AllNetworksResponse | Error> {
 		try {
 			const res = await fetch('http://ps001.taboolasyndication.com:7777', {
 				method: 'POST',

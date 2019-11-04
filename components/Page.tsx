@@ -4,7 +4,7 @@ import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Header from './Header';
 import SideNav, { analysisNavLinks, sideNavWidth } from './analysis/SideNav';
 
-const theme: Theme = {
+const theme: PropsLib.Theme = {
 	colors: {
 		primary: '#282c34',
 		secondary: '#007bff',
@@ -18,11 +18,11 @@ const theme: Theme = {
 
 const StyledPage = styled.div`
 	min-width: 735px;
-	color: ${(props: SCProps): string => props.theme.colors.primary};
+	color: ${(props: PropsLib.SCProps): string => props.theme.colors.primary};
 `;
 
 const Inner = styled.main`
-	max-width: ${(props: SCProps): string => props.theme.maxWidth};
+	max-width: ${(props: PropsLib.SCProps): string => props.theme.maxWidth};
 	margin: 0 auto;
 	padding: 2rem;
 `;
@@ -48,7 +48,7 @@ const GlobalStyle = createGlobalStyle`
 		color: ${theme.colors.black};
 	}
 `;
-const Page: React.FunctionComponent<HOCProps> = (props) => {
+const Page: React.FunctionComponent<PropsLib.HOCProps> = (props) => {
 	const router = useRouter();
 	const analysisPaths = analysisNavLinks.map((link: NavLink) => link.href);
 	const shouldRenderSideNav = analysisPaths.includes(router.pathname);

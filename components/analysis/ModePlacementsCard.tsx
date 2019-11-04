@@ -4,7 +4,7 @@ import formatNumber from '../../utils/formatNumber';
 
 /* eslint-disable @typescript-eslint/camelcase */
 interface ModeDataProps {
-	modeData: LongAnalysisDataResponse;
+	modeData: AdapterTypes.LongAnalysisDataResponse;
 	publisher: string;
 }
 
@@ -53,7 +53,7 @@ const ListItemStyles = styled.li`
 	h3 {
 		font-size: 2rem;
 		margin-bottom: 0;
-		border-bottom: 2px solid ${(props: SCProps): string => props.theme.colors.primary};
+		border-bottom: 2px solid ${(props: PropsLib.SCProps): string => props.theme.colors.primary};
 		width: max-content;
 	}
 `;

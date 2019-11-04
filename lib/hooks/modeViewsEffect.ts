@@ -4,8 +4,8 @@ import Adapter from '../Adapter';
 
 interface ModeViewsEffectArgs {
 	publisher: Publisher;
-	setData: SetData;
-	data: Data;
+	setData: AppContextTypes.SetData;
+	data: AppContextTypes.Data;
 	setError: Dispatch<Error>;
 }
 
@@ -14,7 +14,7 @@ export default ({ publisher, setData, setError, data }: ModeViewsEffectArgs): Ef
 		async function getData(): Promise<void> {
 			try {
 				const pubId = Number(publisher.id);
-				const response: ShortAnalysisResult | Error = await Adapter.getShortAnalysis(pubId);
+				const response: AdapterTypes.ShortAnalysisResult | Error = await Adapter.getShortAnalysis(pubId);
 
 				if (response instanceof Error) throw response;
 

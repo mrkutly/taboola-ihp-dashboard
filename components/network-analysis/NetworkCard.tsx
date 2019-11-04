@@ -3,7 +3,7 @@ import { PubCardStyles } from '../analysis/PublisherCard';
 
 interface PubCardProps {
 	network: Publisher;
-	setNetwork: SetNetwork;
+	setNetwork: AppContextTypes.SetNetwork;
 }
 
 const NetworkCard: React.FunctionComponent<PubCardProps> = ({ network, setNetwork }) => {

@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-const defaultContext: PublisherContext = {
+const defaultContext: AppContextTypes.PublisherContext = {
 	setPublisher: () => {},
 	publisher: {
 		name: '',

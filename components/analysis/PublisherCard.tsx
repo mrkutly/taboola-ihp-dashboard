@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 interface PubCardProps {
 	publisher: Publisher;
-	setPublisher: SetPublisher;
+	setPublisher: AppContextTypes.SetPublisher;
 }
 
 const PublisherCard: React.FunctionComponent<PubCardProps> = ({ publisher, setPublisher }) => {
@@ -45,7 +45,7 @@ export const PubCardStyles = styled.li`
 
 	&:hover,
 	&:focus {
-		color: ${(props: SCProps): string => props.theme.colors.secondary};
+		color: ${(props: PropsLib.SCProps): string => props.theme.colors.secondary};
 	}
 `;
 

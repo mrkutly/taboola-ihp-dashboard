@@ -3,7 +3,7 @@ import makeCSVHref from '../../utils/makeCSVHref';
 import formatNumber from '../../utils/formatNumber';
 
 interface ModeListProps {
-	modes: Mode[];
+	modes: AdapterTypes.Mode[];
 	pubName: string;
 	active?: boolean;
 }
@@ -39,7 +39,7 @@ const ModeList: React.FunctionComponent<ModeListProps> = (props) => {
 	);
 };
 
-type LISProps = SCProps & {
+type LISProps = PropsLib.SCProps & {
 	isEven: boolean;
 	gridColumns: string;
 };
@@ -54,7 +54,7 @@ export const ListItemStyles = styled.li`
 `;
 
 export const DownloadLinkStyles = styled.a`
-	color: ${(props: SCProps): string => props.theme.colors.secondary};
+	color: ${(props: PropsLib.SCProps): string => props.theme.colors.secondary};
 	letter-spacing: 0.5px;
 	font-size: 1.5rem;
 	font-weight: 450;

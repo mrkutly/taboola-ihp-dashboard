@@ -4,8 +4,8 @@ import Adapter from '../Adapter';
 
 interface ModeDataEffectArgs {
 	publisher: Publisher;
-	setData: SetData;
-	data: Data;
+	setData: AppContextTypes.SetData;
+	data: AppContextTypes.Data;
 	setError: Dispatch<Error>;
 }
 
@@ -14,7 +14,7 @@ export default ({ publisher, setData, setError, data }: ModeDataEffectArgs): Eff
 		async function getData(): Promise<void> {
 			try {
 				const pubId = Number(publisher.id);
-				const response: LongAnalysisResult | Error = await Adapter.getLongAnalysis(pubId);
+				const response: AdapterTypes.LongAnalysisResult | Error = await Adapter.getLongAnalysis(pubId);
 
 				if (response instanceof Error) throw response;
 

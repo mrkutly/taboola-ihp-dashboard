@@ -19,7 +19,7 @@ const ModeUsage: React.FunctionComponent = () => {
 	if (error) return <p>{error.message}</p>;
 	if (!data.modeUsage) return <Loading message="getting mode usage info" />;
 
-	const [activeModes, inactiveModes]: [Mode[], Mode[]] = data.modeUsage.all_modes.reduce(
+	const [activeModes, inactiveModes]: [AdapterTypes.Mode[], AdapterTypes.Mode[]] = data.modeUsage.all_modes.reduce(
 		(acc, mode) => {
 			if (mode.MODE_TYPE === 'ACTIVE MODES') {
 				acc[0].push(mode);
@@ -80,7 +80,7 @@ const ModeUsageStyles = styled.section`
 		font-size: 1.6rem;
 
 		span {
-			color: ${(props: SCProps): string => props.theme.colors.secondary};
+			color: ${(props: PropsLib.SCProps): string => props.theme.colors.secondary};
 			margin-right: 10px;
 		}
 
@@ -93,7 +93,7 @@ const ModeUsageStyles = styled.section`
 export const DividerStyles = styled.div`
 	height: 2px;
 	margin: 5vh 0;
-	background: ${(props: SCProps): string => props.theme.colors.accent};
+	background: ${(props: PropsLib.SCProps): string => props.theme.colors.accent};
 `;
 
 export default ModeUsage;

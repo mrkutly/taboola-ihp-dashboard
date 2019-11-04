@@ -105,24 +105,24 @@ const LoadingStyles = styled.div`
 	}
 	@-webkit-keyframes color {
 		0% {
-			stroke: ${(props: SCProps): string => props.theme.colors.secondary};
+			stroke: ${(props: PropsLib.SCProps): string => props.theme.colors.secondary};
 		}
 		50% {
-			stroke: ${(props: SCProps): string => props.theme.colors.accent};
+			stroke: ${(props: PropsLib.SCProps): string => props.theme.colors.accent};
 		}
 		100% {
-			stroke: ${(props: SCProps): string => props.theme.colors.secondary};
+			stroke: ${(props: PropsLib.SCProps): string => props.theme.colors.secondary};
 		}
 	}
 	@keyframes color {
 		0% {
-			stroke: ${(props: SCProps): string => props.theme.colors.secondary};
+			stroke: ${(props: PropsLib.SCProps): string => props.theme.colors.secondary};
 		}
 		50% {
-			stroke: ${(props: SCProps): string => props.theme.colors.accent};
+			stroke: ${(props: PropsLib.SCProps): string => props.theme.colors.accent};
 		}
 		100% {
-			stroke: ${(props: SCProps): string => props.theme.colors.secondary};
+			stroke: ${(props: PropsLib.SCProps): string => props.theme.colors.secondary};
 		}
 	}
 `;

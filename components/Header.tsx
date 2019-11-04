@@ -3,11 +3,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-interface NavLink {
-	text: string;
-	href: string;
-}
-
 const pubNavLinks: NavLink[] = [
 	{
 		text: 'Implementation Health Dashboard',
@@ -32,7 +27,7 @@ const networkNavLinks: NavLink[] = [
 
 const Header: React.FunctionComponent = () => {
 	const router = useRouter();
-	const currentNavLinks: NavLink[] = (function navLinkSwitch() {
+	const currentNavLinks: NavLink[] = (function navLinkSwitch(): NavLink[] {
 		if (router.pathname.match(/network-analysis/g)) {
 			return networkNavLinks;
 		}
@@ -87,7 +82,7 @@ const Header: React.FunctionComponent = () => {
 const HeaderStyles = styled.header`
 	display: flex;
 	background: white;
-	color: ${(props: SCProps): string => props.theme.colors.secondary};
+	color: ${(props: PropsLib.SCProps): string => props.theme.colors.secondary};
 	padding: 1vh 1vw;
 	align-items: center;
 	position: sticky;
@@ -98,7 +93,7 @@ const HeaderStyles = styled.header`
 		content: '';
 		width: 0;
 		height: 2px;
-		background: ${(props: SCProps): string => props.theme.colors.accent};
+		background: ${(props: PropsLib.SCProps): string => props.theme.colors.accent};
 		position: absolute;
 		left: 50%;
 		transform: translateX(-50%);
@@ -124,16 +119,16 @@ const HeaderStyles = styled.header`
 		background: none;
 		border: 0;
 		cursor: pointer;
-		color: ${(props: SCProps): string => props.theme.colors.secondary};
+		color: ${(props: PropsLib.SCProps): string => props.theme.colors.secondary};
 
 		&:hover,
 		&:focus {
-			color: ${(props: SCProps): string => props.theme.colors.accent};
+			color: ${(props: PropsLib.SCProps): string => props.theme.colors.accent};
 			outline: none;
 		}
 
 		&.active {
-			color: ${(props: SCProps): string => props.theme.colors.primary};
+			color: ${(props: PropsLib.SCProps): string => props.theme.colors.primary};
 			cursor: default;
 		}
 	}

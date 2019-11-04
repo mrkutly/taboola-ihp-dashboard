@@ -10,8 +10,8 @@ import DataContext from '../lib/dataContext';
 interface MyAppState {
 	publisher: Publisher;
 	network: Publisher;
-	authentication: Authentication;
-	data: Data;
+	authentication: AppContextTypes.Authentication;
+	data: AppContextTypes.Data;
 }
 
 class MyApp extends App<AppInitialProps> {
@@ -61,11 +61,11 @@ class MyApp extends App<AppInitialProps> {
 		});
 	};
 
-	setAuthentication = (authentication: Authentication): void => {
+	setAuthentication = (authentication: AppContextTypes.Authentication): void => {
 		this.setState({ authentication });
 	};
 
-	setData = (data: Data): void => {
+	setData = (data: AppContextTypes.Data): void => {
 		this.setState({ data });
 	};
 

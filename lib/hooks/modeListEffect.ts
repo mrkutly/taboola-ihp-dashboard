@@ -4,8 +4,8 @@ import Adapter from '../Adapter';
 
 interface ModeListEffectArgs {
 	publisher: Publisher;
-	setData: SetData;
-	data: Data;
+	setData: AppContextTypes.SetData;
+	data: AppContextTypes.Data;
 	setError: Dispatch<Error>;
 }
 
@@ -14,7 +14,7 @@ export default ({ publisher, setData, setError, data }: ModeListEffectArgs): Eff
 		async function getData(): Promise<void> {
 			try {
 				const pubId = Number(publisher.id);
-				const response: ListModesResponse | Error = await Adapter.getModes(pubId);
+				const response: AdapterTypes.ListModesResponse | Error = await Adapter.getModes(pubId);
 
 				if (response instanceof Error) throw response;
 

@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-const defaultContext: DataContext = {
+const defaultContext: AppContextTypes.DataContext = {
 	setData: () => {},
 	data: {
 		modePlacement: null,

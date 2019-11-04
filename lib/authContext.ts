@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-const defaultContext: AuthContext = {
+const defaultContext: AppContextTypes.AuthContext = {
 	setAuthentication: () => {},
 	authentication: {
 		token: null,

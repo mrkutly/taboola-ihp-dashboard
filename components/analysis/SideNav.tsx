@@ -56,18 +56,18 @@ const SideNavStyles = styled.nav`
 	li,
 	a {
 		margin-top: 2vh;
-		color: ${(props: SCProps): string => props.theme.colors.secondary};
+		color: ${(props: PropsLib.SCProps): string => props.theme.colors.secondary};
 	}
 
 	a:focus,
 	a:hover {
-		color: ${(props: SCProps): string => props.theme.colors.accent};
+		color: ${(props: PropsLib.SCProps): string => props.theme.colors.accent};
 	}
 
 	li.active {
-		color: ${(props: SCProps): string => props.theme.colors.primary};
+		color: ${(props: PropsLib.SCProps): string => props.theme.colors.primary};
 		a {
-			color: ${(props: SCProps): string => props.theme.colors.primary};
+			color: ${(props: PropsLib.SCProps): string => props.theme.colors.primary};
 			cursor: auto;
 		}
 	}
