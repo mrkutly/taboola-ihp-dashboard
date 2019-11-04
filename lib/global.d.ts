@@ -65,7 +65,7 @@ declare namespace AppContextTypes {
 
 	type NetworkData = {
 		architecture?: AdapterTypes.NetworkArchitectureResponseData;
-		// modeUsage?: ModeComparisonData;
+		modesByPub?: AdapterTypes.NetworkModesByPublisherResponseData;
 		// modeViews?: ShortAnalysisData;
 		// modeList?: ListModesResponseDatum[];
 	};

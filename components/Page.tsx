@@ -28,6 +28,10 @@ const networkAnalysisNavLinks: NavLink[] = [
 		text: 'Network Architecture',
 		href: '/network-analysis/architecture',
 	},
+	{
+		text: 'Modes By Publisher',
+		href: '/network-analysis/modes-by-publisher',
+	},
 ];
 
 const theme: PropsLib.Theme = {

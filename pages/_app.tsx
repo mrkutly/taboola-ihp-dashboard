@@ -41,6 +41,7 @@ class MyApp extends App<AppInitialProps> {
 		},
 		networkData: {
 			architecture: null,
+			modesByPub: null,
 		},
 	};
 
