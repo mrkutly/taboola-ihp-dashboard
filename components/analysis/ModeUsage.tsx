@@ -4,7 +4,7 @@ import Loading from '../Loading';
 import ModeList from './ModeUsageList';
 import pubContext from '../../lib/pubContext';
 import dataContext from '../../lib/dataContext';
-import modeUsageEffect from '../../lib/hooks/modeUsageEffect';
+import modeUsageEffect from '../../lib/hooks/publisher/modeUsageEffect';
 
 const ModeUsage: React.FunctionComponent = () => {
 	const { publisher } = useContext(pubContext);

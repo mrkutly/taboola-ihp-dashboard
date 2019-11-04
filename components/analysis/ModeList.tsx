@@ -3,7 +3,7 @@ import { useEffect, useState, useContext, Dispatch } from 'react';
 import Loading from '../Loading';
 import PubContext from '../../lib/pubContext';
 import DataContext from '../../lib/dataContext';
-import modeListEffect from '../../lib/hooks/modeListEffect';
+import modeListEffect from '../../lib/hooks/publisher/modeListEffect';
 import { ListItemStyles, DownloadLinkStyles } from './ModeUsageList';
 import makeCSVHref from '../../utils/makeCSVHref';
 

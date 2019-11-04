@@ -102,6 +102,53 @@ const Adapter = {
 			return error;
 		}
 	},
+
+	async getNetworkArchitecture(networkId: number): Promise<AdapterTypes.NetworkArchitectureResponse | Error> {
+		try {
+			const res = await fetch(`${process.env.BACKEND_URL}/impl-network-architecture?network=${networkId}`, {
+				method: 'GET',
+				headers,
+			});
+			return res.json();
+		} catch (error) {
+			return error;
+		}
+	},
+
+	async getNetworkModesByPublisher(networkId: number): Promise<AdapterTypes.NetworkModesByPublisherResponse | Error> {
+		try {
+			const res = await fetch(`${process.env.BACKEND_URL}/impl-network-modes-by-publisher?network=${networkId}`, {
+				method: 'GET',
+				headers,
+			});
+			return res.json();
+		} catch (error) {
+			return error;
+		}
+	},
+
+	async getModesInNetworkLoader(networkId: number): Promise<AdapterTypes.ModesInNetworkLoaderResponse | Error> {
+		try {
+			const res = await fetch(`${process.env.BACKEND_URL}/impl-network-level-loader?network=${networkId}`, {
+				method: 'GET',
+				headers,
+			});
+			return res.json();
+		} catch (error) {
+			return error;
+		}
+	},
+	async getNetworkLoaderUsage(networkId: number): Promise<AdapterTypes.NetworkLoaderUsageResponse | Error> {
+		try {
+			const res = await fetch(`${process.env.BACKEND_URL}/impl-level-loaders?network=${networkId}`, {
+				method: 'GET',
+				headers,
+			});
+			return res.json();
+		} catch (error) {
+			return error;
+		}
+	},
 };
 
 export default Adapter;

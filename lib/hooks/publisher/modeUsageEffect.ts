@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import { Dispatch, EffectCallback } from 'react';
-import Adapter from '../Adapter';
+import Adapter from '../../Adapter';
 
 interface ModeUsageEffectArgs {
 	publisher: Publisher;

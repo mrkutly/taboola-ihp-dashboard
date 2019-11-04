@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-const defaultContext: NetworkContext = {
+const defaultContext: AppContextTypes.NetworkContext = {
 	setNetwork: () => {},
 	network: {
 		name: '',

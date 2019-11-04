@@ -35,16 +35,14 @@ type Publisher = {
 };
 /** Types for Context and global State */
 declare namespace AppContextTypes {
-	declare function SetPublisher(publisher: Publisher): void;
-	type SetPublisher = SetPublisher;
+	type SetPublisher = { (publisher: Publisher): void };
 
 	type PublisherContext = {
 		publisher: Publisher;
 		setPublisher: SetPublisher;
 	};
 
-	declare function SetNetwork(publisher: Publisher): void;
-	type SetNetwork = SetNetwork;
+	type SetNetwork = { (publisher: Publisher): void };
 
 	type NetworkContext = {
 		network: Publisher;
@@ -52,18 +50,31 @@ declare namespace AppContextTypes {
 	};
 
 	type Data = {
-		modePlacement?: LongAnalysisData;
-		modeUsage?: ModeComparisonData;
-		modeViews?: ShortAnalysisData;
-		modeList?: ListModesResponseDatum[];
+		modePlacement?: AdapterTypes.LongAnalysisData;
+		modeUsage?: AdapterTypes.ModeComparisonData;
+		modeViews?: AdapterTypes.ShortAnalysisData;
+		modeList?: AdapterTypes.ListModesResponseDatum[];
 	};
 
-	declare function SetData(data: Data): void;
-	type SetData = SetData;
+	type SetData = { (data: Data): void };
 
 	type DataContext = {
 		data: Data;
 		setData: SetData;
+	};
+
+	type NetworkData = {
+		architecture?: AdapterTypes.NetworkArchitectureResponseData;
+		// modeUsage?: ModeComparisonData;
+		// modeViews?: ShortAnalysisData;
+		// modeList?: ListModesResponseDatum[];
+	};
+
+	type SetNetworkData = { (data: NetworkData): void };
+
+	type NetworkDataContext = {
+		data: NetworkData;
+		setData: SetNetworkData;
 	};
 
 	type Authentication = {
@@ -72,8 +83,7 @@ declare namespace AppContextTypes {
 		isAuthorized: boolean;
 	};
 
-	declare function SetAuthentication(authentication: Authentication): void;
-	type SetAuthentication = SetAuthentication;
+	type SetAuthentication = { (authentication: Authentication): void };
 
 	type AuthContext = {
 		authentication: Authentication;
@@ -181,5 +191,57 @@ declare namespace AdapterTypes {
 		message: string;
 		state: string;
 		data: NetworkArchitectureResponseData[];
+	};
+
+	type NetworkModesByPublisherResponseData = {
+		daterange: string;
+		'modes-by-publisher': {
+			[pubname: string]: string[];
+		};
+	};
+
+	type NetworkModesByPublisherResponse = {
+		message: string;
+		state: string;
+		data: NetworkModesByPublisherResponseData[];
+	};
+
+	type NetworkMode = {
+		account: string;
+		archive_date: string;
+		id: number;
+		mode_date: string;
+		mode_id: number;
+		mode_name: string;
+	};
+
+	type ModesInNetworkLoaderResponseData = {
+		data: NetworkMode[];
+		network_loader: string[];
+	};
+
+	type ModesInNetworkLoaderResponse = {
+		message: string;
+		state: string;
+		data: ModesInNetworkLoaderResponseData[];
+	};
+
+	type LoaderUsageInfo = {
+		account: string;
+		id: number;
+		modes: string | string[];
+	};
+
+	type NetworkLoaderUsageData = {
+		publishers: string[];
+		publisher_ids: number[];
+		network_loader: string[];
+		loaders: LoaderUsageInfo[];
+	};
+
+	type NetworkLoaderUsageResponse = {
+		message: string;
+		state: string;
+		data: NetworkLoaderUsageData[];
 	};
 }

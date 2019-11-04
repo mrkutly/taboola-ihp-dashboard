@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Loading from '../Loading';
 import PubContext from '../../lib/pubContext';
 import DataContext from '../../lib/dataContext';
-import modeViewsEffect from '../../lib/hooks/modeViewsEffect';
+import modeViewsEffect from '../../lib/hooks/publisher/modeViewsEffect';
 import { DownloadLinkStyles, ListItemStyles } from './ModeUsageList';
 import makeCSVHref from '../../utils/makeCSVHref';
 import formatNumber from '../../utils/formatNumber';

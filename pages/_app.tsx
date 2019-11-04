@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Router from 'next/router';
 import Page from '../components/Page';
 import NetworkContext from '../lib/networkContext';
+import NetworkDataContext from '../lib/networkDataContext';
 import PubContext from '../lib/pubContext';
 import AuthContext from '../lib/authContext';
 import DataContext from '../lib/dataContext';
@@ -12,6 +13,7 @@ interface MyAppState {
 	network: Publisher;
 	authentication: AppContextTypes.Authentication;
 	data: AppContextTypes.Data;
+	networkData: AppContextTypes.NetworkData;
 }
 
 class MyApp extends App<AppInitialProps> {
@@ -37,6 +39,9 @@ class MyApp extends App<AppInitialProps> {
 			modeUsage: null,
 			modeViews: null,
 		},
+		networkData: {
+			architecture: null,
+		},
 	};
 
 	setPublisher = (publisher: Publisher): void => {
@@ -53,10 +58,8 @@ class MyApp extends App<AppInitialProps> {
 	setNetwork = (network: Publisher): void => {
 		this.setState({
 			network,
-			data: {
-				modePlacement: null,
-				modeUsage: null,
-				modeViews: null,
+			networkData: {
+				architecture: null,
 			},
 		});
 	};
@@ -67,6 +70,10 @@ class MyApp extends App<AppInitialProps> {
 
 	setData = (data: AppContextTypes.Data): void => {
 		this.setState({ data });
+	};
+
+	setNetworkData = (networkData: AppContextTypes.NetworkData): void => {
+		this.setState({ networkData });
 	};
 
 	render(): JSX.Element {
@@ -87,11 +94,13 @@ class MyApp extends App<AppInitialProps> {
 						value={{ authentication: this.state.authentication, setAuthentication: this.setAuthentication }}
 					>
 						<PubContext.Provider value={{ publisher: this.state.publisher, setPublisher: this.setPublisher }}>
-							<NetworkContext.Provider value={{ network: this.state.network, setNetwork: this.setNetwork }}>
-								<DataContext.Provider value={{ data: this.state.data, setData: this.setData }}>
-									<Component {...pageProps} />
-								</DataContext.Provider>
-							</NetworkContext.Provider>
+							<DataContext.Provider value={{ data: this.state.data, setData: this.setData }}>
+								<NetworkContext.Provider value={{ network: this.state.network, setNetwork: this.setNetwork }}>
+									<NetworkDataContext.Provider value={{ data: this.state.networkData, setData: this.setNetworkData }}>
+										<Component {...pageProps} />
+									</NetworkDataContext.Provider>
+								</NetworkContext.Provider>
+							</DataContext.Provider>
 						</PubContext.Provider>
 					</AuthContext.Provider>
 				</Page>

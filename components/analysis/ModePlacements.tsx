@@ -5,7 +5,7 @@ import PubContext from '../../lib/pubContext';
 import DataContext from '../../lib/dataContext';
 import ModePlacementsCard from './ModePlacementsCard';
 import Loading from '../Loading';
-import modePlacementsEffect from '../../lib/hooks/modePlacementsEffect';
+import modePlacementsEffect from '../../lib/hooks/publisher/modePlacementsEffect';
 import { DownloadLinkStyles } from './ModeUsageList';
 import makeCSVHref from '../../utils/makeCSVHref';
 import formatNumber from '../../utils/formatNumber';
