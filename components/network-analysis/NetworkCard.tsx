@@ -12,7 +12,7 @@ const NetworkCard: React.FunctionComponent<PubCardProps> = ({ network, setNetwor
 
 	const goToPub = (): void => {
 		setNetwork(network);
-		router.push('/network-analysis/mode-list');
+		router.push('/network-analysis/architecture');
 	};
 
 	return (

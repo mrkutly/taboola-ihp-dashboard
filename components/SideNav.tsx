@@ -2,32 +2,17 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-export const analysisNavLinks: NavLink[] = [
-	{
-		text: 'List All Modes',
-		href: '/analysis/mode-list',
-	},
-	{
-		text: 'Page Views',
-		href: '/analysis/mode-views',
-	},
-	{
-		text: 'Placements',
-		href: '/analysis/mode-placements',
-	},
-	{
-		text: 'Usage',
-		href: '/analysis/mode-usage',
-	},
-];
+interface SideNavProps {
+	links: NavLink[];
+}
 
-const SideNav: React.FunctionComponent = () => {
+const SideNav: React.FunctionComponent<SideNavProps> = ({ links }) => {
 	const router = useRouter();
 	return (
 		<SideNavStyles>
-			<h4>Mode reports</h4>
+			<h4>Reports</h4>
 			<ul>
-				{analysisNavLinks.map((link: NavLink) => (
+				{links.map((link: NavLink) => (
 					<li key={link.text} className={router.pathname === link.href ? 'active' : null}>
 						<Link href={link.href}>
 							<a>{link.text}</a>

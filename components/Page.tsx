@@ -2,7 +2,33 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Header from './Header';
-import SideNav, { analysisNavLinks, sideNavWidth } from './analysis/SideNav';
+import SideNav, { sideNavWidth } from './SideNav';
+
+const publisherAnalysisNavLinks: NavLink[] = [
+	{
+		text: 'List All Modes',
+		href: '/analysis/mode-list',
+	},
+	{
+		text: 'Page Views',
+		href: '/analysis/mode-views',
+	},
+	{
+		text: 'Placements',
+		href: '/analysis/mode-placements',
+	},
+	{
+		text: 'Mode Usage',
+		href: '/analysis/mode-usage',
+	},
+];
+
+const networkAnalysisNavLinks: NavLink[] = [
+	{
+		text: 'Network Architecture',
+		href: '/network-analysis/architecture',
+	},
+];
 
 const theme: PropsLib.Theme = {
 	colors: {
@@ -50,14 +76,18 @@ const GlobalStyle = createGlobalStyle`
 `;
 const Page: React.FunctionComponent<PropsLib.HOCProps> = (props) => {
 	const router = useRouter();
-	const analysisPaths = analysisNavLinks.map((link: NavLink) => link.href);
+	const pubPaths = publisherAnalysisNavLinks.map((link: NavLink) => link.href);
+	const networkPaths = networkAnalysisNavLinks.map((link: NavLink) => link.href);
+	const analysisPaths = [...pubPaths, ...networkPaths];
 	const shouldRenderSideNav = analysisPaths.includes(router.pathname);
+	const links = router.pathname.match(/network-analysis/g) ? networkAnalysisNavLinks : publisherAnalysisNavLinks;
+
 	return (
 		<ThemeProvider theme={theme}>
 			<GlobalStyle />
 			<StyledPage>
 				<Header />
-				{shouldRenderSideNav && <SideNav />}
+				{shouldRenderSideNav && <SideNav links={links} />}
 				<Inner style={shouldRenderSideNav ? { marginLeft: sideNavWidth } : {}}>{props.children}</Inner>
 			</StyledPage>
 		</ThemeProvider>
