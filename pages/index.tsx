@@ -4,16 +4,12 @@ import withAuth from '../lib/withAuth';
 
 const links: NavLink[] = [
 	{
-		text: 'Analysis',
+		text: 'Publisher Analysis',
 		href: '/analysis',
 	},
 	{
-		text: 'Paamon (Coming soon)',
-		href: '/',
-	},
-	{
-		text: 'Reporting (Coming soon)',
-		href: '/',
+		text: 'Network Analysis',
+		href: '/network-analysis',
 	},
 ];
 

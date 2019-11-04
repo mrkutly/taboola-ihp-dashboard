@@ -19,11 +19,30 @@ const pubNavLinks: NavLink[] = [
 	},
 ];
 
+const networkNavLinks: NavLink[] = [
+	{
+		text: 'Implementation Health Dashboard',
+		href: '/',
+	},
+	{
+		text: 'Network Search',
+		href: '/network-analysis',
+	},
+];
+
 const Header: React.FunctionComponent = () => {
 	const router = useRouter();
-	const currentNavLinks: NavLink[] = ['/', '/analysis', '/paamon', '/reporting'].includes(router.pathname)
-		? [pubNavLinks[0]]
-		: pubNavLinks;
+	const currentNavLinks: NavLink[] = (function navLinkSwitch() {
+		if (router.pathname.match(/network-analysis/g)) {
+			return networkNavLinks;
+		}
+
+		if (router.pathname.match(/analysis/g)) {
+			return pubNavLinks;
+		}
+
+		return [pubNavLinks[0]];
+	})();
 
 	useEffect((): EffectCallback => {
 		const anchor = document.querySelector('#intersection-anchor');

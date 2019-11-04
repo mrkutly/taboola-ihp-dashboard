@@ -1,35 +1,30 @@
 import { useState, Dispatch, useContext, SetStateAction } from 'react';
 import styled from 'styled-components';
-import SearchForm from '../SearchForm';
-import PublisherCard from './PublisherCard';
+import PubSearchForm from '../SearchForm';
+import NetworkCard from './NetworkCard';
 import Loading from '../Loading';
-import PubContext from '../../lib/pubContext';
+import NetworkContext from '../../lib/networkContext';
+import { PubSearchState } from '../analysis/PubSearchPage';
 
-export interface PubSearchState {
-	error: Error | null;
-	results: Publisher[];
-	loading: boolean;
-}
-
-const PubSearchPage: React.FunctionComponent = () => {
+const NetworkSearchPage: React.FunctionComponent = () => {
 	const [state, setState]: [PubSearchState, Dispatch<SetStateAction<PubSearchState>>] = useState({
 		error: null,
 		results: [],
 		loading: false,
 	});
-	const { setPublisher } = useContext(PubContext);
+	const { setNetwork } = useContext(NetworkContext);
 	const { loading, error, results } = state;
 
 	return (
 		<Container>
-			<h1>Find your publisher to get their analysis.</h1>
-			<SearchForm setSearchState={setState} searchState={state} />
+			<h1>Find your network to get their analysis.</h1>
+			<PubSearchForm setSearchState={setState} searchState={state} network />
 			{error && <p>{error.message}</p>}
 			{loading && <Loading />}
 			{results.length > 0 && <h2>Results</h2>}
 			<ul>
-				{results.map((pub) => (
-					<PublisherCard publisher={pub} key={pub.id} setPublisher={setPublisher} />
+				{results.map((network) => (
+					<NetworkCard network={network} key={network.id} setNetwork={setNetwork} />
 				))}
 			</ul>
 		</Container>
@@ -42,4 +37,4 @@ const Container = styled.div`
 	padding: 2vh 2vw;
 `;
 
-export default PubSearchPage;
+export default NetworkSearchPage;

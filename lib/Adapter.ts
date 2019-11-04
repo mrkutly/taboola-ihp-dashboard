@@ -78,6 +78,30 @@ const Adapter = {
 			return error;
 		}
 	},
+	async getNetwork(networkId: number): Promise<AllNetworksResponse> {
+		try {
+			const res = await fetch('http://ps001.taboolasyndication.com:7777', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json',
+				},
+				body: JSON.stringify({
+					query: `{
+							allNetworks(id:${networkId}){
+								id
+								name
+								description
+							}
+						}
+						`,
+				}),
+			});
+			return res.json();
+		} catch (error) {
+			return error;
+		}
+	},
 };
 
 export default Adapter;

@@ -2,12 +2,14 @@ import App, { AppInitialProps } from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
 import Page from '../components/Page';
+import NetworkContext from '../lib/networkContext';
 import PubContext from '../lib/pubContext';
 import AuthContext from '../lib/authContext';
 import DataContext from '../lib/dataContext';
 
 interface MyAppState {
 	publisher: Publisher;
+	network: Publisher;
 	authentication: Authentication;
 	data: Data;
 }
@@ -18,6 +20,11 @@ class MyApp extends App<AppInitialProps> {
 			name: 'nbcnews',
 			id: '1010748',
 			description: 'NBC - NBCNews',
+		},
+		network: {
+			name: 'tribunedigital-network',
+			id: '1008940',
+			description: 'TribuneDigital - Network',
 		},
 		authentication: {
 			isAuthorized: false,
@@ -43,6 +50,17 @@ class MyApp extends App<AppInitialProps> {
 		});
 	};
 
+	setNetwork = (network: Publisher): void => {
+		this.setState({
+			network,
+			data: {
+				modePlacement: null,
+				modeUsage: null,
+				modeViews: null,
+			},
+		});
+	};
+
 	setAuthentication = (authentication: Authentication): void => {
 		this.setState({ authentication });
 	};
@@ -53,7 +71,7 @@ class MyApp extends App<AppInitialProps> {
 
 	render(): JSX.Element {
 		const { Component, pageProps } = this.props;
-		const { description } = this.state.publisher;
+		const pubDescription = this.state.publisher.description;
 		const shouldAppendPubName = Router && Router.router && !['/', '/analysis'].includes(Router.router.pathname);
 
 		return (
@@ -61,7 +79,7 @@ class MyApp extends App<AppInitialProps> {
 				<Head>
 					<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 					<title>
-						Implementation Health{description.length > 0 && shouldAppendPubName ? ` | ${description}` : null}
+						Implementation Health{pubDescription.length > 0 && shouldAppendPubName ? ` | ${pubDescription}` : null}
 					</title>
 				</Head>
 				<Page>
@@ -69,9 +87,11 @@ class MyApp extends App<AppInitialProps> {
 						value={{ authentication: this.state.authentication, setAuthentication: this.setAuthentication }}
 					>
 						<PubContext.Provider value={{ publisher: this.state.publisher, setPublisher: this.setPublisher }}>
-							<DataContext.Provider value={{ data: this.state.data, setData: this.setData }}>
-								<Component {...pageProps} />
-							</DataContext.Provider>
+							<NetworkContext.Provider value={{ network: this.state.network, setNetwork: this.setNetwork }}>
+								<DataContext.Provider value={{ data: this.state.data, setData: this.setData }}>
+									<Component {...pageProps} />
+								</DataContext.Provider>
+							</NetworkContext.Provider>
 						</PubContext.Provider>
 					</AuthContext.Provider>
 				</Page>

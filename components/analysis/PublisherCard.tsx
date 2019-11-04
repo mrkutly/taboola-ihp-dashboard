@@ -30,7 +30,7 @@ const PublisherCard: React.FunctionComponent<PubCardProps> = ({ publisher, setPu
 	);
 };
 
-const PubCardStyles = styled.li`
+export const PubCardStyles = styled.li`
 	width: max-content;
 	cursor: pointer;
 	padding: 5px 5px 5px 0;

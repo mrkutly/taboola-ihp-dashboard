@@ -47,6 +47,12 @@ type AllPublishersResponse = {
 	};
 };
 
+type AllNetworksResponse = {
+	data: {
+		allNetworks: Publisher[];
+	};
+};
+
 type SetPublisher = {
 	(publisher: Publisher): void;
 };
@@ -54,6 +60,15 @@ type SetPublisher = {
 type PublisherContext = {
 	publisher: Publisher;
 	setPublisher: SetPublisher;
+};
+
+type SetNetwork = {
+	(publisher: Publisher): void;
+};
+
+type NetworkContext = {
+	network: Publisher;
+	setNetwork: SetNetwork;
 };
 
 type Data = {
