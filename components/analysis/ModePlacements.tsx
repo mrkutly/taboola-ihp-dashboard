@@ -64,7 +64,7 @@ const PageViews: React.FunctionComponent = () => {
 	);
 };
 
-const ModeListStyles = styled.ul`
+export const ModeListStyles = styled.ul`
 	list-style: none;
 	margin: 0 auto;
 	padding-left: 0;

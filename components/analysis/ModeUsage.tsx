@@ -90,10 +90,15 @@ const ModeUsageStyles = styled.section`
 	}
 `;
 
+interface DividerStylesProps {
+	noColor: boolean;
+}
+
 export const DividerStyles = styled.div`
 	height: 2px;
 	margin: 5vh 0;
-	background: ${(props: PropsLib.SCProps): string => props.theme.colors.accent};
+	background: ${(props: PropsLib.SCProps & DividerStylesProps): string =>
+		props.noColor ? props.theme.colors.primary : props.theme.colors.accent};
 `;
 
 export default ModeUsage;

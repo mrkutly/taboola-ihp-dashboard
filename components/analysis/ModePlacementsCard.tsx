@@ -46,7 +46,7 @@ const ModeDataCard: React.FunctionComponent<ModeDataProps> = (props) => {
 	);
 };
 
-const ListItemStyles = styled.li`
+export const ListItemStyles = styled.li`
 	margin: 5vh auto;
 	font-size: 1.6rem;
 
@@ -58,7 +58,7 @@ const ListItemStyles = styled.li`
 	}
 `;
 
-const CardStyles = styled.div`
+export const CardStyles = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 
