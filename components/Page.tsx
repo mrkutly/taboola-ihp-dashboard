@@ -32,6 +32,10 @@ const networkAnalysisNavLinks: NavLink[] = [
 		text: 'Modes By Publisher',
 		href: '/network-analysis/modes-by-publisher',
 	},
+	{
+		text: 'Modes In Loader',
+		href: '/network-analysis/modes-in-loader',
+	},
 ];
 
 const theme: PropsLib.Theme = {
